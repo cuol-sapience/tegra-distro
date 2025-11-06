@@ -15,6 +15,7 @@ source repos/poky/oe-init-build-env build
 
 ```
 bitbake mc:arm64-qemu:sapience-image-minimal
+bitbake mc:arm64-qemu:sapience-image-gui
 ```
 
 ---
