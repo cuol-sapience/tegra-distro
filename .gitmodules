@@ -1,26 +1,23 @@
 [submodule "repos/meta-tegra"]
 	path = repos/meta-tegra
 	url = https://github.com/OE4T/meta-tegra
-	branch = scarthgap
+	branch = walnascar
 [submodule "repos/poky"]
 	path = repos/poky
 	url = https://git.yoctoproject.org/poky
-	branch = scarthgap
+	branch = walnascar
 [submodule "repos/meta-openembedded"]
 	path = repos/meta-openembedded
 	url = https://github.com/openembedded/meta-openembedded
-	branch = scarthgap
+	branch = walnascar
 [submodule "repos/meta-ros"]
 	path = repos/meta-ros
 	url = https://github.com/ros/meta-ros
-	branch = scarthgap
+	branch = walnascar
 [submodule "repos/meta-virtualization"]
 	path = repos/meta-virtualization
 	url = https://git.yoctoproject.org/meta-virtualization
-	branch = scarthgap
-[submodule "repos/meta-agl"]
-	path = repos/meta-agl
-	url = https://gerrit.automotivelinux.org/gerrit/AGL/meta-agl
+	branch = walnascar
 [submodule "repos/meta-rtlwifi"]
 	path = repos/meta-rtlwifi
 	url = https://github.com/cuol-sapience/meta-rtlwifi
