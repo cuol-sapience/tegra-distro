@@ -21,3 +21,6 @@
 [submodule "repos/meta-agl"]
 	path = repos/meta-agl
 	url = https://gerrit.automotivelinux.org/gerrit/AGL/meta-agl
+[submodule "repos/meta-rtlwifi"]
+	path = repos/meta-rtlwifi
+	url = https://github.com/cuol-sapience/meta-rtlwifi
