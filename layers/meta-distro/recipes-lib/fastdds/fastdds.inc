@@ -14,3 +14,9 @@ inherit cmake
 EXTRA_OECMAKE += "\
     -DCOMPILE_TOOLS=OFF \
     "
+
+# workaround for tmpdir/workdir in .cmake files causing package QA to fail
+do_install:append() {
+    sed -i "s:${WORKDIR}::g" ${D}/usr/share/fastdds/cmake/*.cmake || true
+    sed -i "s:${TMPDIR}::g" ${D}/usr/share/fastdds/cmake/*.cmake || true
+}

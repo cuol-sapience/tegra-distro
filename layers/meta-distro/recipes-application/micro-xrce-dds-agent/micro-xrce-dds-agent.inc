@@ -9,7 +9,7 @@ S = "${WORKDIR}/git"
 
 # meta-ros2-humble ships with 'fastcdr' v1.0.24-2, we package v2.3.4 ourselves as 'fastcdr2'
 # fastdds not packaged by meta-ros2-humble (kilted+ only)
-DEPENDS = "fastcdr2 fastrtps fastdds"
+DEPENDS = "fastcdr2 fastrtps fastdds libtinyxml2"
 
 inherit cmake
 

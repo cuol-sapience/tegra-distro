@@ -1,10 +1,8 @@
 # (ros)-recipes-core | this requires core-image-minimal
 require sapience-image-minimal.bb
 
+SUMMARY = "Sapience Image with GNOME"
 
-SUMMARY = "Core Sapience image containing ROS"
+#EXTRA_IMAGE_FEATURES:append = " x11-base"
 
-# IMAGE_INSTALL:append = " ros-core"
-EXTRA_IMAGE_FEATURES:append = " ros-implicit-workspace"
-
-IMAGE_INSTALL:append = " packagegroup-pipewire packagegroup-gnome-desktop" 
+IMAGE_INSTALL:append = " packagegroup-gnome-desktop gdm"
