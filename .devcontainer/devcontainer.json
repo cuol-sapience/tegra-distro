@@ -3,7 +3,16 @@
 {
 	"name": "Ubuntu",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/base:noble"
+	"image": "mcr.microsoft.com/devcontainers/base:noble",
+
+	"mounts": ["type=bind,source=/dev/net/tun,target=/dev/net/tun",
+        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached"],
+
+	"runArgs": ["--cap-add=NET_ADMIN"],
+
+    "containerEnv": {
+        "DISPLAY": "unix:0"
+    }
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
