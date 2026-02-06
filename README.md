@@ -38,3 +38,9 @@ xhost local:root
 ```
 runqemu mc:arm64-qemu:sapience-image-gui ext4 publicvnc qemuparams="-m 4096"
 ```
+
+# APT
+
+```
+bitbake mc:arm64-orin-nano:package-index
+```
