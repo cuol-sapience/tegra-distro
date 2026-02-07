@@ -11,6 +11,3 @@
 [submodule "repos/meta-virtualization"]
 	path = repos/meta-virtualization
 	url = https://git.yoctoproject.org/meta-virtualization
-[submodule "repos/meta-rtlwifi"]
-	path = repos/meta-rtlwifi
-	url = https://github.com/cuol-sapience/meta-rtlwifi
