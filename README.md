@@ -8,8 +8,9 @@ sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib buil
 
 git submodule update --init
 
-source repos/poky/oe-init-build-env build
+TEMPLATECONF=$PWD/repos/meta-yocto/meta-poky/conf/templates/default source ./repos/openembedded-core/oe-init-build-env
 ```
+
 
 ## Building
 
