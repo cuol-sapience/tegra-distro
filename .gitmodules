@@ -14,12 +14,12 @@
 [submodule "repos/bitbake"]
 	path = repos/bitbake
 	url = https://git.openembedded.org/bitbake.git
-[submodule "repos/openembedded-core"]
-	path = repos/openembedded-core
-	url = https://git.openembedded.org/openembedded-core
 [submodule "repos/meta-yocto"]
 	path = repos/meta-yocto
 	url = https://git.yoctoproject.org/meta-yocto
 [submodule "repos/yocto-docs"]
 	path = repos/yocto-docs
 	url = https://git.yoctoproject.org/yocto-docs
+[submodule "repos/openembedded-core"]
+	path = repos/openembedded-core
+	url = https://git.openembedded.org/openembedded-core/
