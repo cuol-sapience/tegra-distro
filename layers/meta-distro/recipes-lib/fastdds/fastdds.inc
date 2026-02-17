@@ -7,8 +7,6 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${PV}:"
 # use our packaged fastcdr2
 DEPENDS = " asio fastcdr2 foonathan-memory-vendor libtinyxml2 openssl python3"
 
-S = "${WORKDIR}/git"
-
 inherit cmake
 
 EXTRA_OECMAKE += "\

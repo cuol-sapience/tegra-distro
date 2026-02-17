@@ -5,8 +5,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${PV}:"
 
-S = "${WORKDIR}/git"
-
 # meta-ros2-humble ships with 'fastcdr' v1.0.24-2, we package v2.3.4 ourselves as 'fastcdr2'
 # fastdds not packaged by meta-ros2-humble (kilted+ only)
 DEPENDS = "fastcdr2 fastrtps fastdds libtinyxml2"

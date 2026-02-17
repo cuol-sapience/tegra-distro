@@ -7,6 +7,4 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${PV}:"
 # package license file
 FILES:${PN}:append = " /usr/share/fastcdr/LICENSE"
 
-S = "${WORKDIR}/git"
-
 inherit cmake
