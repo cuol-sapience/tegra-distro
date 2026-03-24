@@ -15,9 +15,9 @@ PACKAGES = "${PN}"
 KERNEL_ARGS:${PN} = "mminit_loglevel=4 console=ttyTCU0,115200 fbcon=map:0 nospectre_bhb video=efifb:off console=tty0"
 
 
-MACHINE_EXTRA_RRECOMMENDS:append:${PN}  = " nv-kernel-module-host1x nv-kernel-module-tegra-drm"
+MACHINE_EXTRA_RRECOMMENDS:append:${PN}  = " nv-kernel-module-host1x kernel-module-tegra-udrm nv-kernel-module-tegra-drm"
 
-KERNEL_MODULE_AUTOLOAD:append:${PN}  = " host1x tegra-drm"
+KERNEL_MODULE_AUTOLOAD:append:${PN}  = " host1x tegra-udrm tegra-drm"
 
 PREFERRED_PROVIDER_virtual_dtb:${PN} = "nvidia-kernel-oot"
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS:${PN} += "nvidia-kernel-oot-alsa nvidia-kernel-oot-display"
