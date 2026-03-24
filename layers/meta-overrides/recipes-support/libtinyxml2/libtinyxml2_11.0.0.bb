@@ -13,8 +13,6 @@ SRCREV = "9148bdf719e997d1f474be6bcc7943881046dba1"
 SRC_URI = "git://github.com/leethomason/tinyxml2.git;branch=master;protocol=https \
            file://run-ptest"
 
-S = "${WORKDIR}/git"
-
 inherit cmake ptest
 
 EXTRA_OECMAKE += "${@bb.utils.contains('PTEST_ENABLED', '1', '-Dtinyxml2_BUILD_TESTING=ON', '', d)}"
