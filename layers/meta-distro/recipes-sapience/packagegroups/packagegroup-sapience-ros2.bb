@@ -13,4 +13,6 @@ PACKAGES = "${PN}"
 RDEPENDS:${PN} = "\
      ros-core \
      micro-xrce-dds-agent \
+     packagegroup-sapience-ros2-flir \
+     packagegroup-sapience-ros2-ouster \
 "
