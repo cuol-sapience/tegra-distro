@@ -1,0 +1,10 @@
+# Ensure display stack users (e.g. gdm) can access Tegra GPU device nodes
+
+# Tegra memory manager used by NVIDIA user-space (Xorg/Wayland stack)
+KERNEL=="nvmap", MODE="0660", GROUP="video"
+
+# Tegra DRM/KMS (primary node)
+SUBSYSTEM=="drm", KERNEL=="card*", MODE="0660", GROUP="video"
+
+# Render nodes (GBM/EGL render-only access)
+SUBSYSTEM=="drm", KERNEL=="renderD*", MODE="0660", GROUP="render"
