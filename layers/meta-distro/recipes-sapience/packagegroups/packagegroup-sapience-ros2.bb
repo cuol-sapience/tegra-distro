@@ -15,4 +15,7 @@ RDEPENDS:${PN} = "\
      micro-xrce-dds-agent \
      packagegroup-sapience-ros2-flir \
      packagegroup-sapience-ros2-ouster \
+     foxglove-msgs \
+     foxglove-bridge \
+     dlio \
 "
