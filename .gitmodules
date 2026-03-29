@@ -23,3 +23,7 @@
 [submodule "repos/openembedded-core"]
 	path = repos/openembedded-core
 	url = https://git.openembedded.org/openembedded-core/
+[submodule "repos/meta-intel"]
+	path = repos/meta-intel
+	url = https://git.yoctoproject.org/meta-intel
+	branch = whinlatter
