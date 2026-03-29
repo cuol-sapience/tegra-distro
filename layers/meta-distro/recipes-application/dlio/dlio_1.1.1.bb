@@ -10,7 +10,7 @@ PV = "1.1.1"
 PR = "r0"
 
 SRCREV = "fc8d183f18cdcfb9bb4fc754c6d373cedc4cbd04"
-SRC_URI = "git://github.com/cuol-sapience/dlio;branch=master;name=master;protocol=https"
+SRC_URI = "git://github.com/cuol-sapience/dlio;branch=feat/city/ros2;name=feat/city/ros2;protocol=https"
 
 DEPENDS = "ament-cmake-native rclcpp ros-environment std-msgs sensor-msgs geometry-msgs nav-msgs pcl-ros libeigen"
 
