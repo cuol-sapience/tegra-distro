@@ -1,0 +1,59 @@
+From 3c1f45a7ac9456a4a57dd607d122b35583f9b918 Mon Sep 17 00:00:00 2001
+From: OpenEmbedded <oe.patch@oe>
+Date: Fri, 27 Mar 2026 18:01:30 +0000
+Subject: [PATCH] backends/native: add udev tag to disable KMS on a GPU
+
+Upstream-Status: Pending
+---
+ src/backends/meta-udev.c                  | 7 +++++++
+ src/backends/meta-udev.h                  | 2 ++
+ src/backends/native/meta-backend-native.c | 3 +++
+ 3 files changed, 12 insertions(+)
+
+diff --git a/src/backends/meta-udev.c b/src/backends/meta-udev.c
+index fbe2d66..b00315e 100644
+--- a/src/backends/meta-udev.c
++++ b/src/backends/meta-udev.c
+@@ -133,6 +133,13 @@ meta_is_udev_device_preferred_primary (GUdevDevice *device)
+   return g_strv_contains (tags, "mutter-device-preferred-primary");
+ }
+ 
++gboolean
++meta_is_udev_device_disable_kms (GUdevDevice *device)
++{
++  return meta_has_udev_device_tag (device,
++                                   "mutter-device-disable-kms");
++}
++
+ gboolean
+ meta_udev_is_drm_device (MetaUdev    *udev,
+                          GUdevDevice *device)
+ 
+diff --git a/src/backends/meta-udev.h b/src/backends/meta-udev.h
+index aac4da0..1fe87ad 100644
+--- a/src/backends/meta-udev.h
++++ b/src/backends/meta-udev.h
+@@ -47,6 +47,8 @@ gboolean meta_is_udev_test_device (GUdevDevice *device);
+ 
+ gboolean meta_is_udev_device_preferred_primary (GUdevDevice *device);
+ 
++gboolean meta_is_udev_device_disable_kms (GUdevDevice *device);
++
+ gboolean meta_udev_is_drm_device (MetaUdev    *udev,
+                                   GUdevDevice *device);
+ 
+diff --git a/src/backends/native/meta-backend-native.c b/src/backends/native/meta-backend-native.c
+index fd018e6..fcc4511 100644
+--- a/src/backends/native/meta-backend-native.c
++++ b/src/backends/native/meta-backend-native.c
+@@ -535,6 +535,9 @@ add_drm_device (MetaBackendNative  *backend_native,
+   if (meta_is_udev_device_preferred_primary (device))
+     flags |= META_KMS_DEVICE_FLAG_PREFERRED_PRIMARY;
+ 
++  if (meta_is_udev_device_disable_kms (device))
++    flags |= META_KMS_DEVICE_FLAG_NO_MODE_SETTING;
++
+   device_path = g_udev_device_get_device_file (device);
+ 
+   render_device = create_render_device (backend_native, device_path, error);
+   

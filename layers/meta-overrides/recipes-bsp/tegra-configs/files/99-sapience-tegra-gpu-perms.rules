@@ -1,10 +1,41 @@
-# Ensure display stack users (e.g. gdm) can access Tegra GPU device nodes
-
-# Tegra memory manager used by NVIDIA user-space (Xorg/Wayland stack)
 KERNEL=="nvmap", MODE="0660", GROUP="video"
 
-# Tegra DRM/KMS (primary node)
-SUBSYSTEM=="drm", KERNEL=="card*", MODE="0660", GROUP="video"
+# card0 = nv_platform (nvdisplay scanout) — seat master
+SUBSYSTEM=="drm", KERNEL=="card0", \
+    ENV{ID_SEAT}="seat0", \
+    TAG+="master-of-seat", TAG+="seat", TAG+="uaccess", \
+    MODE="0660", GROUP="video"
 
-# Render nodes (GBM/EGL render-only access)
-SUBSYSTEM=="drm", KERNEL=="renderD*", MODE="0660", GROUP="render"
+# card1 = host1x DRM — must explicitly assign to seat0 (non-PCI, no auto-assign)
+SUBSYSTEM=="drm", KERNEL=="card1", \
+    ENV{ID_SEAT}="seat0", \
+    TAG+="seat", TAG+="uaccess", \
+    MODE="0660", GROUP="video"
+
+# Render nodes
+SUBSYSTEM=="drm", KERNEL=="renderD*", \
+    TAG+="uaccess", \
+    MODE="0660", GROUP="video" # was render
+
+# GPU command submission — X driver, CUDA, OpenGL all require these
+KERNEL=="nvhost-gpu",              MODE="0660", GROUP="video", TAG+="uaccess"
+KERNEL=="nvhost-as-gpu",           MODE="0660", GROUP="video", TAG+="uaccess"
+KERNEL=="nvhost-ctrl-gpu",         MODE="0660", GROUP="video", TAG+="uaccess"
+KERNEL=="nvhost-ctxsw-gpu",        MODE="0660", GROUP="video", TAG+="uaccess"
+KERNEL=="nvhost-tsg-gpu",          MODE="0660", GROUP="video", TAG+="uaccess"
+KERNEL=="nvhost-dbg-gpu",          MODE="0660", GROUP="video", TAG+="uaccess"
+KERNEL=="nvhost-prof-gpu",         MODE="0660", GROUP="video", TAG+="uaccess"
+KERNEL=="nvhost-prof-ctx-gpu",     MODE="0660", GROUP="video", TAG+="uaccess"
+KERNEL=="nvhost-prof-dev-gpu",     MODE="0660", GROUP="video", TAG+="uaccess"
+KERNEL=="nvhost-sched-gpu",        MODE="0660", GROUP="video", TAG+="uaccess"
+KERNEL=="nvhost-nvsched-gpu",      MODE="0660", GROUP="video", TAG+="uaccess"
+KERNEL=="nvhost-nvsched_ctrl_fifo-gpu", MODE="0660", GROUP="video", TAG+="uaccess"
+KERNEL=="nvhost-power-gpu",        MODE="0660", GROUP="video", TAG+="uaccess"
+
+# NvSciIPC and hwpm (needed by some NVIDIA user-space components)
+KERNEL=="nvsciipc",                MODE="0660", GROUP="video"
+KERNEL=="tegra-soc-hwpm",          MODE="0660", GROUP="video"
+
+# /etc/udev/rules.d/99-sapience-tegra-gpu-perms.rules
+#ly
+KERNEL=="igpu0", SUBSYSTEM=="

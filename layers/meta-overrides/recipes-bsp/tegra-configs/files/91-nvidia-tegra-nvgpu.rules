@@ -1,0 +1,5 @@
+SUBSYSTEM=="nvidia-gpu-v2", MODE="0660", GROUP="video", TAG+="uaccess"
+SUBSYSTEM=="nvidia-gpu-v2-power", MODE="0660", GROUP="video", TAG+="uaccess"
+SUBSYSTEM=="nvidia-gpu", MODE="0660", GROUP="video", TAG+="uaccess"
+SUBSYSTEM=="nvidia-gpu-power", MODE="0660", GROUP="video", TAG+="uaccess"
+
