@@ -9,7 +9,7 @@ LICENSE_FLAGS = "commercial_spinnaker"
 COMPATIBLE_HOST = "(aarch64|arm|x86_64).*-linux"
 PACKAGE_ARCH = "${TUNE_PKGARCH}"
 
-SPINNAKER_ARCH:x86_64 = "amd64"
+SPINNAKER_ARCH:x86-64 = "amd64"
 SPINNAKER_ARCH:aarch64 = "arm64"
 SPINNAKER_ARCH:arm = "armhf"
 
