@@ -19,6 +19,8 @@ SRC_URI[sha256sum] = "${SPINNAKER_SHA256}"
 S = "${UNPACKDIR}/spinnaker-${PV}-${SPINNAKER_ARCH}"
 
 DEPENDS += "dpkg-native"
+DEPENDS:append:x86-64 = " intel-oneapi-mkl"
+
 RDEPENDS:${PN} += "libusb1"
 
 INSANE_SKIP:${PN} += "ldflags"
