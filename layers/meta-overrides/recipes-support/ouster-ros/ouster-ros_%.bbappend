@@ -1,4 +1,4 @@
 LICENSE = "BSD-3-Clause"
 
 inherit cuda
-DEPENDS:append = " cuda-toolkit"
+DEPENDS:append:jetson-orin-nano-devkit = " cuda-toolkit"

@@ -1,2 +1,3 @@
 inherit cuda
-DEPENDS:append = " opencv cuda-toolkit"
+DEPENDS:append = " opencv"
+DEPENDS:append:jetson-orin-nano-devkit = " cuda-toolkit"
