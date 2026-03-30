@@ -1,9 +1,8 @@
-# (ros)-recipes-core | this requires core-image-minimal
-require sapience-image-minimal.bb
+require sel-edge-image-core.bb
 
 include container-base.bb
 
-SUMMARY = "Sapience Minimal Container"
+SUMMARY = "Core SEL container"
 
 # entrypoint
 CONTAINER_APP_CMD ?= "/usr/bin/bash"
@@ -13,3 +12,5 @@ CONTAINER_APP ?= "bash"
 
 OCI_IMAGE_ENTRYPOINT = "${CONTAINER_APP_CMD}"
 IMAGE_INSTALL:append = " ${CONTAINER_APP}"
+
+OCI_IMAGE_USER = "sapience"
