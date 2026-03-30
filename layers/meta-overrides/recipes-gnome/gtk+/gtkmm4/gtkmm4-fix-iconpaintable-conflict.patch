@@ -2,9 +2,9 @@
 +++ b/untracked/gtk/gtkmm/iconpaintable.h
 @@ -33,7 +33,6 @@
  
- #include <glib-object.h>
- 
+ #ifndef DOXYGEN_SHOULD_SKIP_THIS
+ using GtkIconPaintable = struct _GtkIconPaintable;
 -using GtkIconPaintableClass = struct _GtkIconPaintableClass;
+ #endif /* DOXYGEN_SHOULD_SKIP_THIS */
  
- namespace Gtk
- {
+ 
