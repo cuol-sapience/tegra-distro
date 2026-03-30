@@ -1,1 +1,1 @@
-DEPENDS += " rosidl-adapter"
+DEPENDS += " rosidl-adapter rapidjson"
