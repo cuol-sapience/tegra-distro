@@ -1,0 +1,10 @@
+--- a/untracked/gtk/gtkmm/iconpaintable.h
++++ b/untracked/gtk/gtkmm/iconpaintable.h
+@@ -33,7 +33,6 @@
+ 
+ #include <glib-object.h>
+ 
+-using GtkIconPaintableClass = struct _GtkIconPaintableClass;
+ 
+ namespace Gtk
+ {
