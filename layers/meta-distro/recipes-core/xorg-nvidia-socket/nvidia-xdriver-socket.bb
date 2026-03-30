@@ -1,6 +1,8 @@
+LICENSE = "MIT"
+
 SRC_URI += "file://nvidia-xdriver.conf"
 
-inherit systemd tmpfiles
+inherit systemd
 
 do_install:append() {
     install -d ${D}${nonarch_libdir}/tmpfiles.d
