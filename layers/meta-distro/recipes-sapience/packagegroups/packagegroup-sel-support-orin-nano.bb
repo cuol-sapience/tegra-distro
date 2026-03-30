@@ -16,6 +16,7 @@ RDEPENDS:${PN} = "\
     cuda-toolkit \
     nv-kernel-module-host1x \
     nv-kernel-module-tegra-drm \
+    tegra-udrm-gbm \
     networkmanager-wifi \
     wpa-supplicant \
     wireless-regdb-static \
