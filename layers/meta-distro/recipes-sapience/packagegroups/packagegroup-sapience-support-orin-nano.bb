@@ -19,4 +19,5 @@ RDEPENDS:${PN} = "\
     networkmanager-wifi \
     wpa-supplicant \
     wireless-regdb-static \
+    nvidia-xdriver-socket \
     "
