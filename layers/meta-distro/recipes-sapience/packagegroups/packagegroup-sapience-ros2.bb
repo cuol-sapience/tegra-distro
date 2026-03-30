@@ -18,4 +18,5 @@ RDEPENDS:${PN} = "\
      foxglove-msgs \
      foxglove-bridge \
      dlio \
+     camera-ros \
 "

@@ -17,6 +17,9 @@ RDEPENDS:${PN} = "\
     os-release \
     usbutils \
     pciutils \
+    btop \
+    htop \
+    nano \
 "
 
 inherit extrausers

@@ -14,6 +14,7 @@ IMAGE_INSTALL:append = "\
     networkmanager-nmcli \
     packagegroup-sapience-ros2 \
     packagegroup-sapience-utils \
+    packagegroup-sapience-devel \
 "
 
 EXTRA_IMAGE_FEATURES:append = " ros-implicit-workspace"
