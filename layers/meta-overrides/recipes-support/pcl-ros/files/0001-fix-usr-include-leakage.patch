@@ -1,0 +1,15 @@
+Upstream-Status: Pending
+
+diff --git a/CMakeLists.txt.1 b/CMakeLists.txt
+index 258f236..deeb8ff 100644
+--- a/CMakeLists.txt.1
++++ b/CMakeLists.txt
+@@ -123,7 +123,7 @@ add_library(pcd_to_pointcloud_lib SHARED tools/pcd_to_pointcloud.cpp)
+ target_link_libraries(pcd_to_pointcloud_lib
+   ${PCL_LIBRARIES})
+ target_include_directories(pcd_to_pointcloud_lib PUBLIC
+-  ${PCL_INCLUDE_DIRS})
++  $<BUILD_INTERFACE:${PCL_INCLUDE_DIRS}>)
+ ament_target_dependencies(pcd_to_pointcloud_lib
+   rclcpp
+   rclcpp_components
