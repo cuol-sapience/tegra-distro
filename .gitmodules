@@ -4,10 +4,9 @@
 [submodule "repos/meta-openembedded"]
 	path = repos/meta-openembedded
 	url = https://github.com/openembedded/meta-openembedded
-	branch = walnascar
 [submodule "repos/meta-ros"]
 	path = repos/meta-ros
-	url = https://github.com/ros/meta-ros
+	url = https://github.com/cuol-sapience/meta-ros
 [submodule "repos/meta-virtualization"]
 	path = repos/meta-virtualization
 	url = https://git.yoctoproject.org/meta-virtualization
@@ -26,8 +25,6 @@
 [submodule "repos/meta-intel"]
 	path = repos/meta-intel
 	url = https://git.yoctoproject.org/meta-intel
-	branch = whinlatter
 [submodule "repos/meta-clang-revival"]
 	path = repos/meta-clang-revival
 	url = https://github.com/zboszor/meta-clang-revival
-	branch = whinlatter
