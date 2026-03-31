@@ -1,3 +1,5 @@
+Upstream-Status: Pending
+
 --- a/untracked/gtk/gtkmm/iconpaintable.h
 +++ b/untracked/gtk/gtkmm/iconpaintable.h
 @@ -33,7 +33,6 @@
@@ -8,3 +10,24 @@
  #endif /* DOXYGEN_SHOULD_SKIP_THIS */
  
  
+@@ -58,7 +57,7 @@
+   using CppObjectType = IconPaintable;
+   using CppClassType = IconPaintable_Class;
+   using BaseObjectType = GtkIconPaintable;
+-  using BaseClassType = GtkIconPaintableClass;
++  using BaseClassType = struct _GtkIconPaintableClass;
+ 
+   // noncopyable
+   IconPaintable(const IconPaintable&) = delete;
+
+--- a/untracked/gtk/gtkmm/private/iconpaintable_p.h
++++ b/untracked/gtk/gtkmm/private/iconpaintable_p.h
+@@ -16,7 +16,7 @@
+ #ifndef DOXYGEN_SHOULD_SKIP_THIS
+   using CppObjectType = IconPaintable;
+   using BaseObjectType = GtkIconPaintable;
+-  using BaseClassType = GtkIconPaintableClass;
++  using BaseClassType = struct _GtkIconPaintableClass;
+   using CppClassParent = Glib::Object_Class;
+   using BaseClassParent = GObjectClass;
+

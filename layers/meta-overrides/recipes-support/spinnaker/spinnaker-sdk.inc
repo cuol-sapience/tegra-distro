@@ -13,7 +13,7 @@ SPINNAKER_ARCH:x86-64 = "amd64"
 SPINNAKER_ARCH:aarch64 = "arm64"
 SPINNAKER_ARCH:arm = "armhf"
 
-SRC_URI = "https://sapience-pkg.csg.ac/spinnaker/spinnaker-${PV}-${SPINNAKER_ARCH}-${SPINNAKER_OS_VERSION}-pkg.tar.gz"
+SRC_URI = "https://sel.csg.ac/mirror/spinnaker/spinnaker-${PV}-${SPINNAKER_ARCH}-${SPINNAKER_OS_VERSION}-pkg.tar.gz"
 SRC_URI[sha256sum] = "${SPINNAKER_SHA256}"
 
 S = "${UNPACKDIR}/spinnaker-${PV}-${SPINNAKER_ARCH}"
