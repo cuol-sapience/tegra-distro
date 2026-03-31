@@ -1,3 +1,6 @@
+inherit ros_distro_humble
+inherit ros_component
+
 DESCRIPTION = "Lightweight LiDAR-inertial odometry package"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7b8006bec129c9b8669ec031a076bf27"
@@ -9,9 +12,62 @@ ROS_BPN = "direct_lidar_inertial_odometry"
 PV = "1.1.1"
 PR = "r0"
 
-SRCREV = "fc8d183f18cdcfb9bb4fc754c6d373cedc4cbd04"
-SRC_URI = "git://github.com/cuol-sapience/dlio;branch=feat/city/ros2;name=feat/city/ros2;protocol=https"
+SRCREV = "c8acc37100e349d70a9d8432d656cbce7e5072cd"
+SRC_URI = "git://github.com/cuol-sapience/dlio.git;branch=city;protocol=https"
 
-DEPENDS = "ament-cmake-native rclcpp ros-environment std-msgs sensor-msgs geometry-msgs nav-msgs pcl-ros libeigen"
 
-inherit ros_ament_cmake
+ROS_BUILD_DEPENDS = " \
+    ros-environment \
+    geometry-msgs \
+    rclcpp \
+    std-msgs \
+    sensor-msgs \
+    geometry-msgs \
+    nav-msgs \ 
+    pcl \
+    pcl-conversions \
+    pcl-ros \ 
+    libeigen \
+"
+
+ROS_BUILDTOOL_DEPENDS = " \
+    ament-cmake-native \
+    rosidl-default-generators-native \
+"
+
+
+ROS_EXPORT_DEPENDS = " \
+    geometry-msgs \
+    rclcpp \
+    std-msgs \
+    sensor-msgs \
+    geometry-msgs \
+    nav-msgs \ 
+    pcl \
+    pcl-conversions \
+    pcl-ros \ 
+"
+
+ROS_BUILDTOOL_EXPORT_DEPENDS = ""
+
+ROS_EXEC_DEPENDS = " \
+    geometry-msgs \
+    rclcpp \
+    std-msgs \
+    sensor-msgs \
+    geometry-msgs \
+    nav-msgs \ 
+    pcl-conversions \
+    pcl-ros \ 
+    libeigen \
+"
+
+DEPENDS = "${ROS_BUILD_DEPENDS} ${ROS_BUILDTOOL_DEPENDS}"
+RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
+
+DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
+RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
+
+ROS_BUILD_TYPE = "ament_cmake"
+
+inherit ros_${ROS_BUILD_TYPE}
