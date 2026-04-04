@@ -1,0 +1,18 @@
+Subject: [PATCH] arm64: tegra: add arducam dtbo
+
+Upstream-Status: Pending
+
+
+diff --git a/hardware/nvidia/t23x/nv-public/overlay/Makefile b/hardware/nvidia/t23x/nv-public/overlay/Makefile
+index 1234567..89abcdef 100644
+--- a/hardware/nvidia/t23x/nv-public/overlay/Makefile
++++ b/hardware/nvidia/t23x/nv-public/overlay/Makefile
+@@ -66,6 +66,8 @@ dtbo-y += tegra234-p3767-camera-p3768-imx219-A.dtbo
+ dtbo-y += tegra234-p3767-camera-p3768-imx219-imx477.dtbo
+ dtbo-y += tegra234-p3767-camera-p3768-imx477-C.dtbo
+ dtbo-y += tegra234-p3767-camera-p3768-imx477-A.dtbo
++dtbo-y += tegra234-p3767-camera-ar0234-dual.dtbo
++
+ 
+ ifneq ($(dtb-y),)
+ dtb-y := $(addprefix $(makefile-path)/,$(dtb-y))

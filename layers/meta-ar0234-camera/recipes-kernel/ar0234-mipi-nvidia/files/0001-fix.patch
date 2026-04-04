@@ -1,0 +1,32 @@
+Upstream-Status: Pending
+
+diff --git a/nv_ar0234.c b/nv_ar0234.c
+index e1d437f..c37c783 100644
+--- a/nv_ar0234.c
++++ b/nv_ar0234.c
+@@ -24,7 +24,7 @@
+ #include "ar0234_mode_tbls.h"
+ 
+ /* AR0234 Register Definitions */
+-#define AR0234_CHIP_ID 0x0A56
++#define AR0234_CHIP_ID 0xFFFF
+ 
+ #define AR0234_CIT_MIN (2)
+ #define AR0234_CIT_MARGIN (1)
+
+@@ -661,13 +661,13 @@ static int ar0234_board_setup(struct ar0234 *priv)
+ 
+        reg_val = be16_to_cpu(reg_val);
+ 
+-       if (reg_val != AR0234_CHIP_ID) {
++       /*if (reg_val != AR0234_CHIP_ID) {
+                dev_err(dev,
+                        "%s: invalid sensor chip id: 0x%x (expected 0x%x)\n",
+                        __func__, reg_val, AR0234_CHIP_ID);
+                err = -ENODEV;
+                goto err_reg_probe;
+-       }
++       }*/
+ 
+ err_reg_probe:
+        ar0234_power_off(s_data);
