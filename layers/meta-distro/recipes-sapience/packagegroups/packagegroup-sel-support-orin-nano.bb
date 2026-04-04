@@ -21,4 +21,5 @@ RDEPENDS:${PN} = "\
     wireless-regdb-static \
     nvidia-xdriver-socket \
     i2c-tools \
+    packagegroup-sel-multimedia \
     "

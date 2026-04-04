@@ -1,24 +1,27 @@
+# SUMMARY = "TBD"
+DESCRIPTION = "Multimedia package group"
 
-require ${COREBASE}/meta/recipes-core/images/core-image-minimal.bb
+PV = "1.0.0"
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-SUMMARY = "TEST IMAGE"
-DESCRIPTION = "${SUMMARY}"
-LICENSE = "MIT"
+inherit packagegroup
 
-IMAGE_INSTALL:append = "\
-    ${MACHINE_EXTRA_RRECOMMENDS} \
-    networkmanager-nmcli \
-    packagegroup-sel-utils \
+PACKAGES = "${PN}"
+
+RDEPENDS:${PN} = "\
     v4l-utils \
     gstreamer1.0-plugins-good \
     gstreamer1.0-plugins-bad \
     gstreamer1.0-plugins-base \
     gstreamer1.0-plugins-nvvidconv \
     vim-xxd \
+"
+
+RDEPENDS:${PN}:jetson-orin-nano-devkit  = "\
     tegra-argus-daemon \
     tegra-mmapi \
     tegra-libraries-camera \
     gstreamer1.0-plugins-tegra \
     ar0234-mipi-nvidia \
-    "
+"
