@@ -13,6 +13,17 @@ RDEPENDS:${PN} = "\
     setup-nv-boot-control \
     tegra-nv-boot-control-config \
     tegra-redundant-boot-base \
+    tegra-nvfancontrol \
+    tegra-nvphs \
+    tegra-nvphs-base \
+    tegra-nvpmodel \
+    tegra-nvpmodel-base \
+    tegra-nvpower \
+    tegra-nvpower-base \
+    tegra-nvpower-service \
+    tegra-nvsciipc \
+    tegra-nvsciipc-base \
+    tegra-nvstartup \
     cuda-toolkit \
     nv-kernel-module-host1x \
     nv-kernel-module-tegra-drm \
