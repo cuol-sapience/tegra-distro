@@ -1,0 +1,1 @@
+DEPENDS:append = " libxxf86vm"
