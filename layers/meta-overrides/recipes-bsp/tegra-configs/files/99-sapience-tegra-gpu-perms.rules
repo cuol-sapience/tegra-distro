@@ -1,4 +1,4 @@
-KERNEL=="nvmap", MODE="0660", GROUP="video"
+KERNEL=="nvmap", MODE="0660", GROUP="video", TAG+="uaccess"
 
 # card0 = nv_platform (nvdisplay scanout) — seat master
 SUBSYSTEM=="drm", KERNEL=="card0", \
@@ -12,10 +12,10 @@ SUBSYSTEM=="drm", KERNEL=="card1", \
     TAG+="seat", TAG+="uaccess", \
     MODE="0660", GROUP="video"
 
-# Render nodes
+# Render nodes (GROUP was render, changed to video)
 SUBSYSTEM=="drm", KERNEL=="renderD*", \
     TAG+="uaccess", \
-    MODE="0660", GROUP="video" # was render
+    MODE="0660", GROUP="video"
 
 # GPU command submission — X driver, CUDA, OpenGL all require these
 KERNEL=="nvhost-gpu",              MODE="0660", GROUP="video", TAG+="uaccess"
@@ -36,6 +36,4 @@ KERNEL=="nvhost-power-gpu",        MODE="0660", GROUP="video", TAG+="uaccess"
 KERNEL=="nvsciipc",                MODE="0660", GROUP="video"
 KERNEL=="tegra-soc-hwpm",          MODE="0660", GROUP="video"
 
-# /etc/udev/rules.d/99-sapience-tegra-gpu-perms.rules
-#ly
-KERNEL=="igpu0", SUBSYSTEM=="
+

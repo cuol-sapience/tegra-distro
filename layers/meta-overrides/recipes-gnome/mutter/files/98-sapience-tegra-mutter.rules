@@ -1,1 +1,5 @@
-SUBSYSTEM=="drm", KERNEL=="card0", TAG+="mutter-device-disable-kms"
+# Tell mutter to completely ignore host1x DRM (tegra_drm on t234)
+# On Orin, host1x has no display engine — nvidia-drm handles KMS/display.
+# Opening host1x for EGL probing corrupts nvidia EGL state, causing SEGV.
+# Match on DEVPATH since DRIVERS attribute at the card level is just "drm"
+SUBSYSTEM=="drm", KERNEL=="card[0-9]*", DEVPATH=="*/13e00000.host1x/*", TAG+="mutter-device-ignore"
