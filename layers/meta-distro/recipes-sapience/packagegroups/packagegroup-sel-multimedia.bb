@@ -18,7 +18,7 @@ RDEPENDS:${PN} = "\
     vim-xxd \
 "
 
-RDEPENDS:${PN}:jetson-orin-nano-devkit:append  = "\
+RDEPENDS:${PN}:append:jetson-orin-nano-devkit  = "\
     tegra-argus-daemon \
     tegra-mmapi \
     tegra-libraries-camera \
