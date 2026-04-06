@@ -15,8 +15,4 @@ RDEPENDS:${PN} = "\
      micro-xrce-dds-agent \
      packagegroup-sel-ros2-flir \
      packagegroup-sel-ros2-ouster \
-     foxglove-msgs \
-     foxglove-bridge \
-     dlio \
-     camera-ros \
 "
