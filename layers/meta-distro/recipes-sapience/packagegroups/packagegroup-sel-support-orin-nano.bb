@@ -19,8 +19,6 @@ RDEPENDS:${PN} = "\
     tegra-nvpmodel \
     tegra-nvpmodel-base \
     tegra-nvpower \
-    tegra-nvpower-base \
-    tegra-nvpower-service \
     tegra-nvsciipc \
     tegra-nvsciipc-base \
     tegra-nvstartup \
