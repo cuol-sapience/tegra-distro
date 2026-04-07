@@ -25,4 +25,18 @@ update_sudoers(){
     sed -i 's/# %sudo/%sudo/' ${IMAGE_ROOTFS}/etc/sudoers
 }
 
-ROOTFS_POSTPROCESS_COMMAND += "update_sudoers;"
+
+
+# Generate en_GB.UTF-8 locale — required by gnome-terminal and other GNOME apps
+IMAGE_LINGUAS = "en-gb"
+GLIBC_GENERATE_LOCALES = "en_GB.UTF-8"
+IMAGE_INSTALL:append = " locale-base-en-gb"
+
+# Set system locale to UTF-8
+set_system_locale() {
+    mkdir -p ${IMAGE_ROOTFS}/etc
+    echo "LANG=en_GB.UTF-8" > ${IMAGE_ROOTFS}/etc/locale.conf
+}
+
+
+ROOTFS_POSTPROCESS_COMMAND += "update_sudoers;set_system_locale;"
