@@ -38,5 +38,21 @@ set_system_locale() {
     echo "LANG=en_GB.UTF-8" > ${IMAGE_ROOTFS}/etc/locale.conf
 }
 
+# Ensure ROS environment is available in login shells by default.
+set_ros_profile() {
+    install -d ${IMAGE_ROOTFS}${sysconfdir}/profile.d
+    cat > ${IMAGE_ROOTFS}${sysconfdir}/profile.d/ros.sh << EOF
+# Auto-source ROS setup for interactive shells
+if [ -n "\$PS1" ]; then
+    if [ -f /opt/ros/${ROS_DISTRO}/setup.sh ]; then
+        . /opt/ros/${ROS_DISTRO}/setup.sh
+    elif [ -f /opt/ros/${ROS_DISTRO}/setup.bash ]; then
+        . /opt/ros/${ROS_DISTRO}/setup.bash
+    fi
+fi
+EOF
+    chmod 0644 ${IMAGE_ROOTFS}${sysconfdir}/profile.d/ros.sh
+}
 
-ROOTFS_POSTPROCESS_COMMAND += "update_sudoers;set_system_locale;"
+
+ROOTFS_POSTPROCESS_COMMAND += "update_sudoers;set_system_locale;set_ros_profile;"
