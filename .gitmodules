@@ -28,3 +28,6 @@
 [submodule "repos/meta-clang-revival"]
 	path = repos/meta-clang-revival
 	url = https://github.com/zboszor/meta-clang-revival
+[submodule "repos/meta-browser"]
+	path = repos/meta-browser
+	url = https://github.com/OSSystems/meta-browser
