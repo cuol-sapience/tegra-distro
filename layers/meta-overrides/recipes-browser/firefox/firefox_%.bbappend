@@ -1,1 +1,1 @@
-DEPENDS:${PN}:append = " libseccomp"
+DEPENDS += "libseccomp"
