@@ -10,6 +10,7 @@ inherit packagegroup
 PACKAGES = "${PN}"
 
 RDEPENDS:${PN} = "\
+    sel-environment \
     kernel-module-smsc95xx \
     networkmanager-nmcli \
     packagegroup-sel-ros2 \
