@@ -1,0 +1,34 @@
+Patch that fixes deprecated calls in CUDA13
+
+Original source: https://github.com/nvidia-isaac/nvblox/blob/3f42b210df9ad7a2099f00fcf324049d97342cb0/nvblox/thirdparty/stdgpu/stdgpu.cmake
+
+Modified for revision d1e6232406a1726051201686ff7661552330276d
+
+Upstream-Status: Inappropriate [from nvblox]
+
+diff --git a/src/stdgpu/cuda/impl/device.cpp b/src/stdgpu/cuda/impl/device.cpp
+index 161ec3f..22fc52a 100644
+--- a/src/stdgpu/cuda/impl/device.cpp
++++ b/src/stdgpu/cuda/impl/device.cpp
+@@ -81,8 +81,6 @@ print_device_information()
+     printf("|%*s%*s%*s|\n", gpu_name_space_left, " ", gpu_name_size, gpu_name.c_str(), gpu_name_space_right, " ");
+     printf("+---------------------------------------------------------+\n");
+     printf("| Compute Capability        :   %1d.%1d                       |\n", properties.major, properties.minor);
+-    printf("| Clock rate                :   %-6.0f MHz                |\n",
+-           static_cast<double>(detail::kilo_to_mega_hertz(static_cast<float>(clock_rate))));
+     printf("| Global Memory             :   %-6.3f GiB / %-6.3f GiB   |\n",
+            static_cast<double>(detail::byte_to_gibi_byte(static_cast<float>(free_memory))),
+            static_cast<double>(detail::byte_to_gibi_byte(static_cast<float>(total_memory))));
+diff --git a/src/stdgpu/hip/impl/device.cpp b/src/stdgpu/hip/impl/device.cpp
+index 26b4176..be6b113 100644
+--- a/src/stdgpu/hip/impl/device.cpp
++++ b/src/stdgpu/hip/impl/device.cpp
+@@ -80,8 +80,6 @@ print_device_information()
+     printf("|%*s%*s%*s|\n", gpu_name_space_left, " ", gpu_name_size, gpu_name.c_str(), gpu_name_space_right, " ");
+     printf("+---------------------------------------------------------+\n");
+     printf("| GCN Architecture          :   %s%*s|\n", arch_name.c_str(), arch_name_space_right, " ");
+-    printf("| Clock rate                :   %-6.0f MHz                |\n",
+-           static_cast<double>(detail::kilo_to_mega_hertz(static_cast<float>(properties.clockRate))));
+     printf("| Global Memory             :   %-6.3f GiB / %-6.3f GiB   |\n",
+            static_cast<double>(detail::byte_to_gibi_byte(static_cast<float>(free_memory))),
+            static_cast<double>(detail::byte_to_gibi_byte(static_cast<float>(total_memory))));

@@ -1,0 +1,80 @@
+Patch that prepends stdgpu namespace to conflicting cuda functions.
+
+Original source: https://github.com/nvidia-isaac/nvblox/blob/3f42b210df9ad7a2099f00fcf324049d97342cb0/nvblox/thirdparty/stdgpu/stdgpu.cmake
+
+Modified for revision d1e6232406a1726051201686ff7661552330276d
+
+Upstream-Status: Inappropriate [from nvblox]
+
+diff --git a/src/stdgpu/impl/memory_detail.h b/src/stdgpu/impl/memory_detail.h
+index 33238eb..35a2965 100644
+--- a/src/stdgpu/impl/memory_detail.h
++++ b/src/stdgpu/impl/memory_detail.h
+@@ -111,7 +111,7 @@ public:
+     STDGPU_HOST_DEVICE void
+     operator()(const index64_t i)
+     {
+-        construct_at(to_address(_begin + i), _value);
++        construct_at(stdgpu::to_address(_begin + i), _value);
+     }
+ 
+ private:
+@@ -134,7 +134,7 @@ public:
+     {
+         // Directly dereference _begin instead of trying to get its raw pointer.
+         // This adds support for transform_iterator, etc. which neither have operator->() nor get().
+-        construct_at(to_address(_output_begin + i), _begin[i]);
++        construct_at(stdgpu::to_address(_output_begin + i), _begin[i]);
+     }
+ 
+ private:
+@@ -154,7 +154,7 @@ public:
+     STDGPU_HOST_DEVICE void
+     operator()(const index64_t i)
+     {
+-        destroy_at(to_address(_first + i));
++        stdgpu::destroy_at(stdgpu::to_address(_first + i));
+     }
+ 
+ private:
+@@ -601,7 +601,7 @@ template <typename T, class... Args>
+ STDGPU_HOST_DEVICE void
+ allocator_traits<Allocator>::construct([[maybe_unused]] Allocator& a, T* p, Args&&... args)
+ {
+-    construct_at(p, forward<Args>(args)...);
++    construct_at(p, stdgpu::forward<Args>(args)...);
+ }
+ 
+ template <typename Allocator>
+@@ -609,7 +609,7 @@ template <typename T>
+ STDGPU_HOST_DEVICE void
+ allocator_traits<Allocator>::destroy([[maybe_unused]] Allocator& a, T* p)
+ {
+-    destroy_at(p);
++    stdgpu::destroy_at(p);
+ }
+ 
+ template <typename Allocator>
+@@ -639,11 +639,11 @@ to_address(const Ptr& p) noexcept
+ {
+     if constexpr (detail::has_arrow_operator_v<Ptr>)
+     {
+-        return to_address(p.operator->());
++        return stdgpu::to_address(p.operator->());
+     }
+     else if constexpr (!detail::has_arrow_operator_v<Ptr> && detail::has_get_v<Ptr>)
+     {
+-        return to_address(p.get());
++        return stdgpu::to_address(p.get());
+     }
+     else
+     {
+@@ -659,7 +659,7 @@ STDGPU_HOST_DEVICE T*
+ construct_at(T* p, Args&&... args)
+ {
+     // NOLINTNEXTLINE(bugprone-multi-level-implicit-pointer-conversion)
+-    return ::new (static_cast<void*>(const_cast<std::remove_cv_t<T>*>(p))) T(forward<Args>(args)...);
++    return ::new (static_cast<void*>(const_cast<std::remove_cv_t<T>*>(p))) T(stdgpu::forward<Args>(args)...);
+ }
+ 
+ template <typename T>
