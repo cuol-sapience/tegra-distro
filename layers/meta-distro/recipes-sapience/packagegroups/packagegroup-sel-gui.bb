@@ -19,6 +19,7 @@ SEL_GUI_DE_RDEPENDS = "\
     xdpyinfo \
     gdm \
     hicolor-icon-theme \
+    sel-gui-background \
 "
 
 SEL_GUI_SOUND_RDEPENDS = "\
