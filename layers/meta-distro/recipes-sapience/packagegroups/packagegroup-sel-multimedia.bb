@@ -9,16 +9,18 @@ inherit packagegroup
 
 PACKAGES = "${PN}"
 
-RDEPENDS:${PN} = "\
+RDEPENDS:${PN} = " \
     v4l-utils \
     gstreamer1.0-plugins-good \
     gstreamer1.0-plugins-bad \
     gstreamer1.0-plugins-base \
-    gstreamer1.0-plugins-nvvidconv \
+    gstreamer1.0-plugins-ugly \
     vim-xxd \
 "
 
-RDEPENDS:${PN}:append:jetson-orin-nano-devkit  = "\
+
+# gstreamer1.0-plugins-tegra is a metapackage for all tegra gstreamer plugins
+RDEPENDS:${PN}:jetson-orin-nano-devkit:append  = " \
     tegra-argus-daemon \
     tegra-mmapi \
     tegra-libraries-camera \
