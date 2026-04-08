@@ -31,6 +31,3 @@
 [submodule "repos/meta-browser"]
 	path = repos/meta-browser
 	url = https://github.com/OSSystems/meta-browser
-[submodule "repos/meta-python-ai"]
-	path = repos/meta-python-ai
-	url = https://github.com/zboszor/meta-python-ai
