@@ -7,8 +7,14 @@ HOMEPAGE = "https://github.com/nvidia-isaac/nvblox"
 LICENSE = "Apache-2.0 & BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=8d8c50db3bb79d824bdd7276d6a50bc1"
 
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+
 SRCREV = "3f42b210df9ad7a2099f00fcf324049d97342cb0"
-SRC_URI = "git://github.com/nvidia-isaac/nvblox.git;branch=public;protocol=https"
+SRC_URI = " \
+    git://github.com/nvidia-isaac/nvblox.git;branch=public;protocol=https \
+    file://0001-cmake-find-sqlite3.patch \
+"
+
 
 inherit cmake cuda
 

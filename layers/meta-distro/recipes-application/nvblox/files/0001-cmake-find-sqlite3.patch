@@ -1,0 +1,17 @@
+Use the official FindSQLite3.cmake in CMake v3.14+
+
+Also see: https://github.com/introlab/rtabmap/issues/1250
+
+Upstream-Status: Inappropriate [temporary-hacks]
+
+diff --git a/nvblox/thirdparty/sqlite/sqlite.cmake b/nvblox/thirdparty/sqlite/sqlite.cmake
+index d4c75d5..cd2275d 100644
+--- a/nvblox/thirdparty/sqlite/sqlite.cmake
++++ b/nvblox/thirdparty/sqlite/sqlite.cmake
+@@ -1,5 +1,5 @@
+ if(USE_SYSTEM_SQLITE3)
+-  find_package(sqlite3 REQUIRED)
++  find_package(SQLite3 REQUIRED)
+ else()
+   include(FetchContent)
+ 
