@@ -16,4 +16,5 @@ RDEPENDS:${PN} = "\
      packagegroup-sel-ros2-flir \
      packagegroup-sel-ros2-ouster \
      python3-colcon-common-extensions \
+     aruco-pose-estimator \
 "
