@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/nvidia-isaac/nvblox.git;branch=public;protocol=https
 
 inherit cmake cuda
 
-NVBLOX_EXEC_DEPENDS = "\
+NVBLOX_EXEC_DEPENDS = " \
     gflags \
     sqlite3 \
     libeigen \
@@ -21,31 +21,39 @@ NVBLOX_EXEC_DEPENDS = "\
     pytorch \
 "
 
-NVBLOX_TEST_DEPENDS = "\
+NVBLOX_TEST_DEPENDS = " \
     googletest \
     google-benchmark \
 "
 
-NVBLOX_BUILD_DEPENDS = "\
+NVBLOX_BUILD_DEPENDS = " \
     jq \
     gnupg \
 "
 
 # sudo apt-get update && sudo apt-get install cmake git jq gnupg apt-utils software-properties-common build-essential sudo python3-pip wget sudo git python3-dev git-lfs
-DEPENDS += "\
+DEPENDS += " \
     ${NVBLOX_BUILD_DEPENDS} \
     ${NVBLOX_EXEC_DEPENDS} \
     ${NVBLOX_TEST_DEPENDS} \
 "
 
-RDEPENDS:${PN} += "\
+RDEPENDS:${PN} += " \
     ${NVBLOX_EXEC_DEPENDS} \
 "
 
-# example for setting build flags (eg nvblox examples)
-# EXTRA_OECMAKE += " -DBUILD_EXPERIMENTS=ON"
+# use system packages instead of downloading in configure
+EXTRA_OECMAKE:append  = " \
+    -DUSE_SYSTEM_BENCHMARK=ON \
+    -DUSE_SYSTEM_EIGEN=ON \
+    -DUSE_SYSTEM_GFLAGS=ON \
+    -DUSE_SYSTEM_GLOG=ON \
+    -DUSE_SYSTEM_GTEST=ON \
+    -DUSE_SYSTEM_SQLITE3=ON \
+    -DUSE_SYSTEM_STDGPU=ON \
+"
 
 # Set cuda arch since we may not be compiling on target hardware
 # 87 (8.7) is orin nano's compute capability, (this opt may include forward compat. stuff)
 # 87-real means generate for  this hardware *exactly* (may not work on future cap. versions)
-EXTRA_OECMAKE:append:jetson-orin-nano-devkit = " -DCMAKE_CUDA_ARCHITECTURES=87-real "
+EXTRA_OECMAKE:jetson-orin-nano-devkit:append = " -DCMAKE_CUDA_ARCHITECTURES=87-real "
