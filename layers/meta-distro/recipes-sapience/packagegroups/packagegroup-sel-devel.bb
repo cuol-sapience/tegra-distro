@@ -10,9 +10,9 @@ inherit packagegroup
 PACKAGES = "${PN}"
 
 RDEPENDS:${PN} = "\
+    packagegroup-core-buildessential \
     git \
     cmake \
-    gcc \
     make \ 
     ninja \
 "
