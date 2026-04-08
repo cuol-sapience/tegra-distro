@@ -15,8 +15,9 @@ EXTRA_IMAGE_FEATURES:append = " ros-implicit-workspace"
 
 inherit extrausers
 EXTRA_USERS_PARAMS = "\
-    useradd -p '' sapience; \
+    useradd -p '' -s /bin/bash sapience; \
     usermod -a -G input,video,sudo sapience; \
+    usermod -s /bin/bash root; \
     "
 
 # sudo extra config: https://stackoverflow.com/a/42615560
