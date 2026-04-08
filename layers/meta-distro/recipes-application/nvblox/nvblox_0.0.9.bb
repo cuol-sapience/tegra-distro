@@ -1,0 +1,51 @@
+DESCRIPTION = "nvblox is a library for real-time 3D reconstruction, designed for robotic applications."
+HOMEPAGE = "https://github.com/nvidia-isaac/nvblox"
+
+# nvblox is Apache 2; voxblox is BSD-3-Clause
+# https://github.com/nvidia-isaac/nvblox/blob/public/LICENSE.md
+# https://github.com/ethz-asl/voxblox/blob/master/LICENSE
+LICENSE = "Apache-2.0 & BSD-3-Clause"
+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=8d8c50db3bb79d824bdd7276d6a50bc1"
+
+SRCREV = "3f42b210df9ad7a2099f00fcf324049d97342cb0"
+SRC_URI = "git://github.com/nvidia-isaac/nvblox.git;branch=public;protocol=https"
+
+inherit cmake cuda
+
+NVBLOX_EXEC_DEPENDS = "\
+    gflags \
+    sqlite3 \
+    libeigen \
+    glog \
+    stdgpu \
+    pytorch \
+"
+
+NVBLOX_TEST_DEPENDS = "\
+    googletest \
+    google-benchmark \
+"
+
+NVBLOX_BUILD_DEPENDS = "\
+    jq \
+    gnupg \
+"
+
+# sudo apt-get update && sudo apt-get install cmake git jq gnupg apt-utils software-properties-common build-essential sudo python3-pip wget sudo git python3-dev git-lfs
+DEPENDS += "\
+    ${NVBLOX_BUILD_DEPENDS} \
+    ${NVBLOX_EXEC_DEPENDS} \
+    ${NVBLOX_TEST_DEPENDS} \
+"
+
+RDEPENDS:${PN} += "\
+    ${NVBLOX_EXEC_DEPENDS} \
+"
+
+# example for setting build flags (eg nvblox examples)
+# EXTRA_OECMAKE += " -DBUILD_EXPERIMENTS=ON"
+
+# Set cuda arch since we may not be compiling on target hardware
+# 87 (8.7) is orin nano's compute capability, (this opt may include forward compat. stuff)
+# 87-real means generate for  this hardware *exactly* (may not work on future cap. versions)
+EXTRA_OECMAKE:append:jetson-orin-nano-devkit = " -DCMAKE_CUDA_ARCHITECTURES=87-real "

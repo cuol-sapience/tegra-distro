@@ -13,6 +13,7 @@ RDEPENDS:${PN} = "\
     kernel-module-smsc95xx \
     networkmanager-nmcli \
     packagegroup-sel-ros2 \
+    packagegroup-sel-ai \
     packagegroup-sel-utils \
     packagegroup-sel-devel \
 "
