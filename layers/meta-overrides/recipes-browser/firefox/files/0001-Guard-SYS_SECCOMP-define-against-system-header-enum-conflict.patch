@@ -1,0 +1,24 @@
+Date: Mon, 7 Apr 2026 00:00:00 +0000
+Subject: [PATCH] Include signal.h for SYS_SECCOMP to fix enum redefinition conflict
+
+Recent glibc defines SYS_SECCOMP as an enum value in bits/siginfo-consts.h
+along with a self-referential macro alias. Without including signal.h first,
+linux_seccomp.h defines SYS_SECCOMP=1 via its #ifndef guard, and then when
+signal.h is included later in a translation unit the enum identifier
+SYS_SECCOMP gets macro-expanded to 1, causing a syntax error.
+
+Fix by including <signal.h> at the top of linux_seccomp.h so glibc's
+definition takes precedence and the #ifndef guard suppresses our #define.
+This matches the fix already landed in Firefox main.
+
+Upstream-Status: Backport
+
+--- a/security/sandbox/chromium/sandbox/linux/system_headers/linux_seccomp.h
++++ b/security/sandbox/chromium/sandbox/linux/system_headers/linux_seccomp.h
+@@ -6,5 +6,6 @@
+ #define SANDBOX_LINUX_SYSTEM_HEADERS_LINUX_SECCOMP_H_
+ 
++#include <signal.h> // for SYS_SECCOMP
+ #include <stdint.h>
+ #include <sys/ioctl.h>
+ 
