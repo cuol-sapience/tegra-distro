@@ -10,21 +10,8 @@ inherit packagegroup
 PACKAGES = "${PN}"
 
 RDEPENDS:${PN} = "\
-    setup-nv-boot-control \
-    tegra-nv-boot-control-config \
-    tegra-redundant-boot-base \
-    tegra-nvfancontrol \
-    tegra-nvphs \
-    tegra-nvphs-base \
-    tegra-nvpmodel \
-    tegra-nvpmodel-base \
-    tegra-nvpower \
-    tegra-nvsciipc \
-    tegra-nvsciipc-base \
-    tegra-nvstartup \
     cuda-toolkit \
-    nv-kernel-module-host1x \
-    nv-kernel-module-tegra-drm \
+    kernel-module-ar0234 \
     networkmanager-wifi \
     wpa-supplicant \
     wireless-regdb-static \
