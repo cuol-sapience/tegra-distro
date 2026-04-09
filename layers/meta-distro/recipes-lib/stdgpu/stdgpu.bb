@@ -23,3 +23,5 @@ PV = "1.3.0+git"
 EXTRA_OECMAKE += " -DSTDGPU_BUILD_TESTS=OFF -DSTDGPU_BUILD_BENCHMARKS=OFF"
 
 # TODO: use OpenMP backend when CUDA not available?...
+
+ALLOW_EMPTY:${PN} = "1"
