@@ -130,7 +130,7 @@
                     compatible = "i2c-mux-gpio";
                     #address-cells = <1>;
                     #size-cells = <0>;
-                    mux-gpios = <&gpio_aon CAM_I2C_MUX GPIO_ACTIVE_HIGH>;
+                    mux-gpios = <&gpio_aon CAM_I2C_MUX GPIO_ACTIVE_LOW>;
                     i2c-parent = <&cam_i2c>;
                     i2c@0 {
                         status = "okay";
