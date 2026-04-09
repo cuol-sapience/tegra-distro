@@ -1,6 +1,8 @@
 inherit ros_distro_humble
 inherit ros_component
 
+inherit pkgconfig
+
 DESCRIPTION = "ROS2 port of gscam with IPC support"
 HOMEPAGE = "https://github.com/clydemcqueen/gscam2"
 
