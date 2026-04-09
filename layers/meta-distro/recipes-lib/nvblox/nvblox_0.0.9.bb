@@ -58,7 +58,7 @@ EXTRA_OECMAKE:append  = " \
     -DUSE_SYSTEM_GTEST=ON \
     -DUSE_SYSTEM_SQLITE3=ON \
     -DUSE_SYSTEM_STDGPU=ON \
-    -DCMAKE_CUDA_IMPLICIT_INCLUDE_DIRECTORIES=${RECIPE_SYSROOT}${libdir} \
+    -DCMAKE_CUDA_IMPLICIT_INCLUDE_DIRECTORIES=${RECIPE_SYSROOT}${includedir} \
 "
 
 # Set cuda arch since we may not be compiling on target hardware
@@ -81,3 +81,10 @@ do_configure:append() {
         ln -sf ${RECIPE_SYSROOT}${libdir}/libstdgpu.a ${RECIPE_SYSROOT}${libdir}/libnvblox_stdgpu.a
     fi
 }
+
+FILES_SOLIBSDEV = ""
+FILES:${PN} += "${libdir}/*.so"
+
+INSANE_SKIP:${PN} += "buildpaths"
+INSANE_SKIP:${PN}-dev += "buildpaths"
+INSANE_SKIP:${PN}-dbg += "buildpaths"
