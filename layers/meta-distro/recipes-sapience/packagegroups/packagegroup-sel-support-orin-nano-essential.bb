@@ -3,9 +3,9 @@ DESCRIPTION = "Jetson (Orin Nano) Support packages - Essential (required for ope
 
 PV = "1.0.0"
 
-PACKAGE_ARCH = "${MACHINE_ARCH}"
-
 inherit packagegroup
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 PACKAGES = "${PN}"
 
