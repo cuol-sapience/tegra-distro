@@ -18,8 +18,7 @@ SRC_URI = " \
 
 inherit cmake cuda
 
-
-PV = "1.3.0"
+PV = "1.3.0+git"
 
 EXTRA_OECMAKE += " -DSTDGPU_BUILD_TESTS=OFF -DSTDGPU_BUILD_BENCHMARKS=OFF"
 
