@@ -13,6 +13,6 @@ RDEPENDS:${PN} = "\
     packagegroup-core-buildessential \
     git \
     cmake \
-    make \ 
+    make \
     ninja \
 "
