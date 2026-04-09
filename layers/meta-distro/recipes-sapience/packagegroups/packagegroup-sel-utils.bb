@@ -20,4 +20,6 @@ RDEPENDS:${PN} = "\
     btop \
     htop \
     nano \
+    tmux \
+    screen \
 "
