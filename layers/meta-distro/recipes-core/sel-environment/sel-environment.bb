@@ -14,6 +14,5 @@ do_install() {
     install -m 0755 sel.sh ${D}${sysconfdir}/profile.d/
     chmod 0644 ${D}${sysconfdir}/profile.d/sel.sh
 
-    install -m 664 profile-sourcing.sh ${D}${sysconfdir}/profile
     install -m 664 profile-sourcing.sh ${D}${sysconfdir}/bash.bashrc
 }
