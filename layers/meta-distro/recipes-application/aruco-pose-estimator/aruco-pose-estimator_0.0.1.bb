@@ -62,3 +62,6 @@ RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 ROS_BUILD_TYPE = "ament_cmake"
 
 inherit ros_${ROS_BUILD_TYPE}
+
+inherit cuda
+DEPENDS:append:jetson-orin-nano-devkit = " cuda-toolkit"
