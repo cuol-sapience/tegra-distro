@@ -16,7 +16,7 @@ RDEPENDS:${PN} = "\
     packagegroup-sel-devel \
 "
 
-RDEPENDS:${PN}:jetson-orin-nano-devkit:append = " \
+RDEPENDS:${PN}:append:jetson-orin-nano-devkit = " \
     kernel-module-smsc95xx \
     networkmanager-nmcli \
     packagegroup-sel-ai \

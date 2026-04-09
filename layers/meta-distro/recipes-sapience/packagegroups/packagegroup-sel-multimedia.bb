@@ -20,7 +20,7 @@ RDEPENDS:${PN} = " \
 
 
 # gstreamer1.0-plugins-tegra is a metapackage for all tegra gstreamer plugins
-RDEPENDS:${PN}:jetson-orin-nano-devkit:append  = " \
+RDEPENDS:${PN}:append:jetson-orin-nano-devkit  = " \
     tegra-argus-daemon \
     tegra-mmapi \
     tegra-libraries-camera \
