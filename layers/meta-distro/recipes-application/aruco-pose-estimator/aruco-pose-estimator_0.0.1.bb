@@ -63,7 +63,4 @@ ROS_BUILD_TYPE = "ament_cmake"
 
 inherit ros_${ROS_BUILD_TYPE}
 
-inherit cuda
-DEPENDS:append:jetson-orin-nano-devkit = " cuda-toolkit"
-
-RDEPENDS:${PN}:append:jetson-orin-nano-devkit = " cuda-toolkit"
+inherit cuda-available
