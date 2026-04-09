@@ -80,12 +80,20 @@ index 33238eb..35a2965 100644
  template <typename T>
 --- a/src/stdgpu/impl/unordered_base_detail.cuh
 +++ b/src/stdgpu/impl/unordered_base_detail.cuh
-@@ -485,7 +485,7 @@ public:
+@@ -485,7 +485,15 @@ public:
      STDGPU_DEVICE_ONLY void
      operator()(const index_t i)
      {
 -        _base.insert(*to_address(_begin + i));
-+        _base.insert(Value(*stdgpu::to_address(_begin + i)));
++        auto&& val = *stdgpu::to_address(_begin + i);
++        if constexpr (std::is_constructible_v<Value, decltype(val)>)
++        {
++            _base.insert(Value(val));
++        }
++        else
++        {
++            _base.insert(Value(val.first, val.second));
++        }
      }
  
  private:

@@ -13,6 +13,7 @@ SRCREV = "3f42b210df9ad7a2099f00fcf324049d97342cb0"
 SRC_URI = " \
     git://github.com/nvidia-isaac/nvblox.git;branch=public;protocol=https \
     file://0001-cmake-find-sqlite3.patch \
+    file://0002-eigen3-int-instead-of-sizet.patch \
 "
 
 
@@ -57,9 +58,27 @@ EXTRA_OECMAKE:append  = " \
     -DUSE_SYSTEM_GTEST=ON \
     -DUSE_SYSTEM_SQLITE3=ON \
     -DUSE_SYSTEM_STDGPU=ON \
+    -DCMAKE_CUDA_IMPLICIT_INCLUDE_DIRECTORIES=${RECIPE_SYSROOT}${libdir} \
 "
 
 # Set cuda arch since we may not be compiling on target hardware
 # 87 (8.7) is orin nano's compute capability, (this opt may include forward compat. stuff)
 # 87-real means generate for  this hardware *exactly* (may not work on future cap. versions)
 EXTRA_OECMAKE:jetson-orin-nano-devkit:append = " -DCMAKE_CUDA_ARCHITECTURES=87-real "
+
+TARGET_CXXFLAGS:append = " -Wno-template-body "
+
+do_configure:prepend() {
+    # Fix CMake alias fallback by faking the nvblox_stdgpu library
+    cd ${RECIPE_SYSROOT}${libdir}
+    
+    if [ -e "libstdgpu.so" ]; then
+        bbnote "Creating nvblox_stdgpu.so symlink for linker"
+        ln -sf libstdgpu.so libnvblox_stdgpu.so
+    fi
+    
+    if [ -e "libstdgpu.a" ]; then
+        bbnote "Creating nvblox_stdgpu.a symlink for linker"
+        ln -sf libstdgpu.a libnvblox_stdgpu.a
+    fi
+}

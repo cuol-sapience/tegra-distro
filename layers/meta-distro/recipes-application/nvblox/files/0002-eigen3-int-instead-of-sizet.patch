@@ -1,0 +1,15 @@
+Upstream-Status: Inappropriate [temporary-hacks]
+
+diff --git a/nvblox/src/mesh/mesh_integrator_appearance.cu b/nvblox/src/mesh/mesh_integrator_appearance.cu
+index 57acee3..3439da1 100644
+--- a/nvblox/src/mesh/mesh_integrator_appearance.cu
++++ b/nvblox/src/mesh/mesh_integrator_appearance.cu
+@@ -128,7 +128,7 @@ __global__ void updateAppearanceBlockByClosestVoxel(
+     // - This is will (very?) occasionally be incorrect when mesh vertices
+     //   escape block boundaries. However, making this assumption saves us any
+     //   neighbor calculations.
+-    constexpr size_t KVoxelsPerSizeMinusOne =
++    constexpr int KVoxelsPerSizeMinusOne =
+         VoxelBlock<AppearanceVoxelType>::kVoxelsPerSide - 1;
+     voxel_idx_in_block =
+         voxel_idx_in_block.array().min(KVoxelsPerSizeMinusOne).max(0);
