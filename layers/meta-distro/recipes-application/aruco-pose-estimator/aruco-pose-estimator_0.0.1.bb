@@ -27,6 +27,9 @@ ROS_BUILD_DEPENDS = " \
     opencv \
 "
 
+# OpenCV on orin uses CUDA
+ROS_BUILD_DEPENDS:append:jetson-orin-nano-devkit = " cuda-toolkit"
+
 ROS_BUILDTOOL_DEPENDS = " \
     ament-cmake-native \
 "
@@ -40,6 +43,8 @@ ROS_EXPORT_DEPENDS = " \
     cv-bridge \
     opencv \
 "
+
+ROS_EXPORT_DEPENDS:append:jetson-orin-nano-devkit = " cuda-toolkit"
 
 ROS_BUILDTOOL_EXPORT_DEPENDS = ""
 
