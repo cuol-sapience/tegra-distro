@@ -68,17 +68,16 @@ EXTRA_OECMAKE:jetson-orin-nano-devkit:append = " -DCMAKE_CUDA_ARCHITECTURES=87-r
 
 TARGET_CXXFLAGS:append = " -Wno-template-body "
 
-do_configure:prepend() {
+do_configure:append() {
     # Fix CMake alias fallback by faking the nvblox_stdgpu library
-    cd ${RECIPE_SYSROOT}${libdir}
     
-    if [ -e "libstdgpu.so" ]; then
+    if [ -e "${RECIPE_SYSROOT}${libdir}/libstdgpu.so" ]; then
         bbnote "Creating nvblox_stdgpu.so symlink for linker"
-        ln -sf libstdgpu.so libnvblox_stdgpu.so
+        ln -sf ${RECIPE_SYSROOT}${libdir}/libstdgpu.so ${RECIPE_SYSROOT}${libdir}/libnvblox_stdgpu.so
     fi
     
-    if [ -e "libstdgpu.a" ]; then
+    if [ -e "${RECIPE_SYSROOT}${libdir}/libstdgpu.a" ]; then
         bbnote "Creating nvblox_stdgpu.a symlink for linker"
-        ln -sf libstdgpu.a libnvblox_stdgpu.a
+        ln -sf ${RECIPE_SYSROOT}${libdir}/libstdgpu.a ${RECIPE_SYSROOT}${libdir}/libnvblox_stdgpu.a
     fi
 }
