@@ -10,11 +10,23 @@ inherit packagegroup
 
 PACKAGES = "${PN}"
 
+ROS2_PKG_CAMERA_CALIBRATION = "\
+     camera-calibration \
+     launch-testing-ament-cmake \
+     image-pipeline \
+"
+
+ROS2_PKG_CAMERA = "\
+     gscam2 \
+     ${ROS2_PKG_CAMERA_CALIBRATION} \
+     aruco-pose-estimator \
+"
+
 RDEPENDS:${PN} = "\
      ros-core \
      micro-xrce-dds-agent \
      packagegroup-sel-ros2-flir \
      packagegroup-sel-ros2-ouster \
      python3-colcon-common-extensions \
-     aruco-pose-estimator \
+     ${ROS2_PKG_CAMERA} \
 "
