@@ -1,0 +1,14 @@
+[Unit]
+Description=Resize NVMe Root Partition
+After=local-fs.target
+# Only run if the filesystem isn't already full size (prevents repeat runs)
+ConditionPathExists=!/var/lib/resize-done
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/resize2fs /dev/nvme0n1p1
+ExecStartPost=/bin/touch /var/lib/resize-done
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
