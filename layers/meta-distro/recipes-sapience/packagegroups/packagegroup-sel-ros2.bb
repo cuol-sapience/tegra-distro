@@ -25,6 +25,7 @@ ROS2_PKG_CAMERA = "\
 RDEPENDS:${PN} = "\
      ros-core \
      micro-xrce-dds-agent \
+     cyclonedds \
      packagegroup-sel-ros2-flir \
      packagegroup-sel-ros2-ouster \
      python3-colcon-common-extensions \
