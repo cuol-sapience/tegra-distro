@@ -10,6 +10,8 @@ SRC_URI += "\
 
 S = "${UNPACKDIR}"
 
+RDEPENDS:${PN} = "dconf"
+
 do_install() {
     install -d ${D}${sysconfdir}/dconf/profile
     install -m 0644 ${S}/dconf-profile-user.txt ${D}${sysconfdir}/dconf/profile/user
@@ -21,4 +23,19 @@ do_install() {
     install -m 0644 ${S}/sel-background.png ${D}${datadir}/backgrounds/sel.png
 }
 
-FILES:${PN} += "${datadir}/backgrounds/sel.png"
+
+pkg_postinst:${PN}() {
+    if [ -n "$D" ]; then
+        # don't run if not on actual target
+        exit 1
+    fi
+    
+    # Update settings db file
+    dconf update
+}
+
+FILES:${PN} += " \
+    ${datadir}/backgrounds/sel.png \
+    ${sysconfdir}/dconf/profile/user \
+    ${sysconfdir}/dconf/db/local.d/00-background \
+"
