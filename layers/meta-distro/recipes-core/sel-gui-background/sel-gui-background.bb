@@ -24,12 +24,7 @@ do_install() {
 }
 
 
-pkg_postinst:${PN}() {
-    if [ -n "$D" ]; then
-        # don't run if not on actual target
-        exit 1
-    fi
-    
+pkg_postinst_ontarget:${PN}() {
     # Update settings db file
     dconf update
 }
