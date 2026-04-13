@@ -15,7 +15,8 @@ WEBRTC_TRIPLE = "linux-${WEBRTC_ARCH}-release"
 SRC_URI += "https://github.com/livekit/rust-sdks/releases/download/${WEBRTC_TAG}/webrtc-${WEBRTC_TRIPLE}.zip;name=webrtc-prebuilt;subdir=webrtc-prebuilt"
 
 WEBRTC_PREBUILT_SHA256:aarch64 = "4e8cad5b00c75c0a19717b28bc96c17da852c7dbbe9163bd5ab32ae150304665"
-WEBRTC_PREBUILT_SHA256 = ""
+# x86_64
+WEBRTC_PREBUILT_SHA256 = "8bf389f03fd8203486eb0a39ad9b36dcd86fd4487fb65640f8a8b903294b617f"
 
 SRC_URI[webrtc-prebuilt.sha256sum] = "${WEBRTC_PREBUILT_SHA256}"
 
