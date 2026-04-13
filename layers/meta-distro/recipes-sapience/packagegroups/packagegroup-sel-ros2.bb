@@ -36,4 +36,6 @@ RDEPENDS:${PN} = "\
      python3-rospkg \
      ${ROS2_PKG_CAMERA} \
      ${ROS_SDK_TARGET_PACKAGES} \
+     foxglove-bridge \
+     foxglove-msgs \
 "
