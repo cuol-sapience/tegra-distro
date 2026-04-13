@@ -5,14 +5,16 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 
 
-WEBRTC_TAG = "webrtc-0001d84-2"
+PV = "144.0+7af9351"
+
+WEBRTC_TAG = "webrtc-7af9351"
 
 WEBRTC_ARCH = "${@'arm64' if d.getVar('TARGET_ARCH') == 'aarch64' else 'x64'}"
 WEBRTC_TRIPLE = "linux-${WEBRTC_ARCH}-release"
 
 SRC_URI += "https://github.com/livekit/rust-sdks/releases/download/${WEBRTC_TAG}/webrtc-${WEBRTC_TRIPLE}.zip;name=webrtc-prebuilt;subdir=webrtc-prebuilt"
 
-WEBRTC_PREBUILT_SHA256:aarch64 = "d3181bd42900f9b3b15bec4669187861a226d6e8657734f2f51649f71c974bc0"
+WEBRTC_PREBUILT_SHA256:aarch64 = "4e8cad5b00c75c0a19717b28bc96c17da852c7dbbe9163bd5ab32ae150304665"
 WEBRTC_PREBUILT_SHA256 = ""
 
 SRC_URI[webrtc-prebuilt.sha256sum] = "${WEBRTC_PREBUILT_SHA256}"
@@ -41,17 +43,14 @@ do_install() {
           "${D}${libdir}/livekit-webrtc/"
 }
 
-FILES:${PN}-dev = "${libdir}/livekit-webrtc/"
-INSANE_SKIP:${PN}-dev += "staticlib dev-elf"
+FILES:${PN}-dev = "\
+    ${libdir}/livekit-webrtc/include/ \
+    ${libdir}/livekit-webrtc/webrtc.ninja \
+    ${libdir}/livekit-webrtc/desktop_capture.ninja \
+"
+
+FILES:${PN}-staticdev = "\
+    ${libdir}/livekit-webrtc/lib/ \
+"
+
 ALLOW_EMPTY:${PN} = "1"
-
-
-# Below makes this sysroot only
-do_package[noexec]           = "1"
-do_package_write_rpm[noexec] = "1"
-do_package_write_ipk[noexec] = "1"
-do_package_write_deb[noexec] = "1"
-deltask do_package_qa
-
-# populates ${STAGING_LIBDIR} so DEPENDS works
-SYSROOT_DIRS += "${libdir}"

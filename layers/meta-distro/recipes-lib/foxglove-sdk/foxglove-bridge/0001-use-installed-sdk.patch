@@ -1,0 +1,41 @@
+From: James Cahill <james@sapience.ai>
+Subject: [PATCH] Add USE_INSTALLED_SDK option for Yocto sysroot builds
+
+Upstream-Status: Inappropriate [OE-specific]
+
+Use an installed foxglove-sdk from the OE sysroot instead of fetching
+pre-built artifacts from GitHub (unavailable in offline Yocto builds).
+When USE_INSTALLED_SDK=ON, foxglove_cpp_static is an INTERFACE target
+that exposes the installed C++ and C include directories and links
+against the installed shared library.  No .cpp compilation is required
+because the C++ SDK wrappers are thin inline/header-only wrappers
+around the C API.
+
+---
+ CMakeLists.txt | 12 ++++++++++++
+ 1 file changed, 13 insertions(+), 1 deletion(-)
+
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -15,6 +15,7 @@
+ set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+ option(USE_LOCAL_SDK "Use pre-built Foxglove SDK binaries from local source tree" OFF)
++option(USE_INSTALLED_SDK "Use installed Foxglove SDK found via find_package" OFF)
+
+ macro(enable_strict_compiler_warnings target)
+   if (MSVC)
+@@ -50,7 +51,12 @@
+   add_compile_definitions(ARCH_IS_BIG_ENDIAN=1)
+ endif()
+
+-if (USE_LOCAL_SDK)
++if (USE_INSTALLED_SDK)
++  find_package(foxglove-sdk REQUIRED)
++  find_library(ZSTD_LIBRARY zstd REQUIRED)
++  add_library(foxglove_cpp_static INTERFACE)
++  target_link_libraries(foxglove_cpp_static INTERFACE foxglove-sdk::foxglove_cpp_static ${ZSTD_LIBRARY})
++elseif (USE_LOCAL_SDK)
+   set(FOXGLOVE_SDK_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/../../..)
+   add_library(foxglove_cpp_static STATIC IMPORTED)
+   set_target_properties(foxglove_cpp_static PROPERTIES
