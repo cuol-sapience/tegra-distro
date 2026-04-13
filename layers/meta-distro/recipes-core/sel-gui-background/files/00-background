@@ -5,7 +5,7 @@
 picture-uri='file:///usr/share/backgrounds/sel.png'
 
 # Specify one of the rendering options for the background image:
-picture-options='scaled'
+picture-options='zoom'
 
 # Specify the left or top color when drawing gradients, or the solid color
 primary-color='000000'
