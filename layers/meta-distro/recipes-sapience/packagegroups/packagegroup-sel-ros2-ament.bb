@@ -8,6 +8,8 @@ inherit packagegroup
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 
+# ament-download: needs meta-ros c65eb7cda2952e8d7594ef8b055ecf9419db2886 applied to humble
+
 RDEPENDS:${PN} = "\
     ament-cmake-auto \
 	ament-cmake-core \
@@ -33,7 +35,6 @@ RDEPENDS:${PN} = "\
 	ament-cmake \
 	ament-cmake-catch2 \
 	ament-cmake-ros \
-	ament-download \
 	ament-index-cpp \
 	ament-index-python \
 	ament-cmake-copyright \
