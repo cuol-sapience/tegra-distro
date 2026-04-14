@@ -5,8 +5,6 @@ PV = "1.0.0"
 
 inherit packagegroup
 
-require conf/ros-distro/include/humble/ros-sdk.inc
-
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 
@@ -24,18 +22,33 @@ ROS2_PKG_CAMERA = "\
      aruco-pose-estimator \
 "
 
+
+ROS2_PKG_CLI = "\
+     ros2cli-common-extensions \
+     ros2bag \
+"
+
+
 RDEPENDS:${PN} = "\
      ros-core \
+     ros-base \
      micro-xrce-dds-agent \
+     fastrtps \
      cyclonedds \
+     packagegroup-sel-ros2-ament \
+     packagegroup-sel-ros2-colcon \
      packagegroup-sel-ros2-flir \
      packagegroup-sel-ros2-ouster \
-     python3-colcon-common-extensions \
-     python3-rosdep \
-     python3-rosdistro \
-     python3-rospkg \
-     ${ROS2_PKG_CAMERA} \
-     ${ROS_SDK_TARGET_PACKAGES} \
+     packagegroup-sel-ros2-rcl \
+     packagegroup-sel-ros2-rosdep \
+     packagegroup-sel-ros2-rosidl \
      foxglove-bridge \
      foxglove-msgs \
+     common-interfaces \
+     ros-environment \
+     ros-workspace \
+     topic-monitor \
+     ${ROS2_PKG_CAMERA} \
+     ${ROS2_PKG_CLI} \
+
 "
