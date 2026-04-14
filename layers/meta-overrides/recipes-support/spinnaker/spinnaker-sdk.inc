@@ -22,8 +22,8 @@ DEPENDS += "dpkg-native"
 
 RDEPENDS:${PN}:append = " libusb1"
 
-RDEPENDS:${PN}:append:x86-64 = " intel-oneapi-mkl"
-DEPENDS:append:x86-64 = " intel-oneapi-mkl"
+RDEPENDS:${PN}:append:class-target:x86-64 = " intel-oneapi-mkl"
+DEPENDS:append:class-target:x86-64 = " intel-oneapi-mkl"
 
 INSANE_SKIP:${PN} += "ldflags"
 INHIBIT_PACKAGE_STRIP = "1"
