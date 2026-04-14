@@ -50,5 +50,4 @@ RDEPENDS:${PN} = "\
      topic-monitor \
      ${ROS2_PKG_CAMERA} \
      ${ROS2_PKG_CLI} \
-
 "
