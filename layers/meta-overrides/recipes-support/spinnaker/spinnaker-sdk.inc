@@ -74,13 +74,11 @@ FILES:${PN} += " \
     ${datadir}/spinnaker \
 "
 
+FILES:${PN}:append:qemux86-64  = " ${libdir}/libiomp*.so"
+
 FILES:${PN}-dev += " \
     ${libdir}/libSpinnaker*.so \
     ${includedir}/spinnaker \
-"
-
-FILES:${PN}-dev:qemux86-64  += " \
-    ${libdir}/libiomp*.so \
 "
 
 RDEPENDS:${PN}-dev += "${PN} (= ${EXTENDPKGV})"
