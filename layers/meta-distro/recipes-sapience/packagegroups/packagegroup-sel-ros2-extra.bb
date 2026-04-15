@@ -21,9 +21,6 @@ RDEPENDS:${PN} = "\
 	python3-pyproj \
 	python3-pytest-cov \
 	python3-pytest-mock \
-	python3-transforms3d \
-	tvm \
-	fmilibrary \
 	foonathan-memory \
 	python3-construct \
 	python3-whichcraft \
