@@ -33,21 +33,22 @@ RDEPENDS:${PN} = "\
      ros-core \
      ros-base \
      micro-xrce-dds-agent \
+     fastdds \
      fastrtps \
      cyclonedds \
      packagegroup-sel-ros2-ament \
      packagegroup-sel-ros2-colcon \
+     packagegroup-sel-ros2-extra \
      packagegroup-sel-ros2-flir \
+     packagegroup-sel-ros2-msgs \
      packagegroup-sel-ros2-ouster \
      packagegroup-sel-ros2-rcl \
      packagegroup-sel-ros2-rosdep \
      packagegroup-sel-ros2-rosidl \
      foxglove-bridge \
      foxglove-msgs \
-     common-interfaces \
      ros-environment \
      ros-workspace \
-     topic-monitor \
      ${ROS2_PKG_CAMERA} \
      ${ROS2_PKG_CLI} \
 "
