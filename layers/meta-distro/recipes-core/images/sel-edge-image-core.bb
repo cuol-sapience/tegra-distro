@@ -9,6 +9,7 @@ NETWORK_MANAGER = "networkmanager"
 IMAGE_INSTALL:append = "\
     ${MACHINE_EXTRA_RRECOMMENDS} \
     packagegroup-sel-core \
+    packagegroup-sel-sdk \
 "
 
 EXTRA_IMAGE_FEATURES:append = " ros-implicit-workspace"
