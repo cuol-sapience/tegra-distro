@@ -47,6 +47,7 @@ do_install() {
 
     find ${UNPACKDIR}/pkgroot/opt/spinnaker/lib -maxdepth 1 -type f,l \
         \( -name 'libSpinnaker*.so*' -o \
+           -name 'libiomp*.so*' -o \
            -name 'libG*.so*' -o \
            -name 'lib*Parser*.so*' -o \
            -name 'libLog*.so*' -o \
@@ -76,6 +77,10 @@ FILES:${PN} += " \
 FILES:${PN}-dev += " \
     ${libdir}/libSpinnaker*.so \
     ${includedir}/spinnaker \
+"
+
+FILES:${PN}-dev:qemux86-64  += " \
+    ${libdir}/libiomp*.so \
 "
 
 RDEPENDS:${PN}-dev += "${PN} (= ${EXTENDPKGV})"
