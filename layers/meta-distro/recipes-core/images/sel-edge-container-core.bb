@@ -1,23 +1,20 @@
 require sel-edge-image-core.bb
 
-inherit image-oci
-
 SUMMARY = "Core SEL container"
 
-# entrypoint
-CONTAINER_APP_CMD ?= "/usr/bin/bash"
+IMAGE_FSTYPES = "container oci"
 
-# packages
-CONTAINER_APP ?= "bash"
+inherit image
+inherit image-oci
+
+OCI_IMAGE_AUTHOR = "Sapience"
+OCI_IMAGE_TAG = "latest"
+OCI_IMAGE_RUNTIME_UID = "1000"
+OCI_IMAGE_ENTRYPOINT = "/usr/bin/bash"
+OCI_IMAGE_CMD = "/usr/bin/bash"
+OCI_IMAGE_WORKINGDIR = "/home/sapience"
 
 PREFERRED_PROVIDER_virtual/kernel = "linux-dummy"
-
-OCI_IMAGE_ENTRYPOINT = "${CONTAINER_APP_CMD}"
-IMAGE_INSTALL:append = " ${CONTAINER_APP}"
-
-OCI_IMAGE_USER = "sapience"
-
-IMAGE_FSTYPES = "oci"
 
 # Don't build QEMU as we want an OCI container
 EXTRA_IMAGEDEPENDS:remove = "qemu-native qemu-helper-native"
