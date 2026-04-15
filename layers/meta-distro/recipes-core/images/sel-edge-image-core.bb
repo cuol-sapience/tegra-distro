@@ -58,3 +58,5 @@ EOF
 
 
 ROOTFS_POSTPROCESS_COMMAND += "update_sudoers;set_system_locale;set_ros_profile;"
+
+SYSTEMD_DEFAULT_TARGET = "multi-user.target"

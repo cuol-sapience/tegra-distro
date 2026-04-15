@@ -4,4 +4,5 @@ SUMMARY = "SEL image with GNOME"
 
 IMAGE_INSTALL:append = " packagegroup-sel-gui"
 
-SYSTEMD_DEFAULT_TARGET = "graphical.target"
+# use 'sel-switch-desktop' alias command to jump to graphical target 
+# SYSTEMD_DEFAULT_TARGET = "graphical.target"
