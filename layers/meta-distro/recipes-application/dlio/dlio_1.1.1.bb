@@ -12,7 +12,7 @@ ROS_BPN = "direct_lidar_inertial_odometry"
 PV = "1.1.1"
 PR = "r0"
 
-SRCREV = "c8acc37100e349d70a9d8432d656cbce7e5072cd"
+SRCREV = "bbbd0677a78ac5468d65b332a8c4415ad1693c18"
 SRC_URI = "git://github.com/cuol-sapience/dlio.git;branch=city;protocol=https"
 
 
@@ -28,6 +28,7 @@ ROS_BUILD_DEPENDS = " \
     pcl-conversions \
     pcl-ros \ 
     libeigen \
+    openmp \
 "
 
 ROS_BUILDTOOL_DEPENDS = " \
@@ -46,6 +47,7 @@ ROS_EXPORT_DEPENDS = " \
     pcl \
     pcl-conversions \
     pcl-ros \ 
+    openmp \
 "
 
 ROS_BUILDTOOL_EXPORT_DEPENDS = ""
@@ -60,6 +62,7 @@ ROS_EXEC_DEPENDS = " \
     pcl-conversions \
     pcl-ros \ 
     libeigen \
+    openmp \
 "
 
 DEPENDS = "${ROS_BUILD_DEPENDS} ${ROS_BUILDTOOL_DEPENDS}"
@@ -71,3 +74,5 @@ RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 ROS_BUILD_TYPE = "ament_cmake"
 
 inherit ros_${ROS_BUILD_TYPE}
+
+EXTRA_OECMAKE += "-DCMAKE_NO_SYSTEM_FROM_IMPORTED=ON"
