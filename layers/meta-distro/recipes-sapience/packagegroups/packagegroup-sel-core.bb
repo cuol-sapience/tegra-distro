@@ -14,6 +14,8 @@ RDEPENDS:${PN} = "\
     packagegroup-sel-ros2 \
     packagegroup-sel-utils \
     packagegroup-sel-devel \
+    packagegroup-sel-optitrack \
+    packagegroup-sel-sdk \
 "
 
 RDEPENDS:${PN}:append:jetson-orin-nano-devkit = " \

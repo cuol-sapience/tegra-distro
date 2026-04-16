@@ -11,6 +11,7 @@ PACKAGES = "${PN}"
 
 RDEPENDS:${PN} = "\
     cuda-toolkit \
+    gcc-for-nvcc \
     kernel-module-ar0234 \
     networkmanager-wifi \
     wpa-supplicant \
@@ -18,4 +19,4 @@ RDEPENDS:${PN} = "\
     nvidia-xdriver-socket \
     i2c-tools \
     packagegroup-sel-multimedia \
-    "
+"
