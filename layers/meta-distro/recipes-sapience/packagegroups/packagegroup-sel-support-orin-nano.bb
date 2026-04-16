@@ -13,6 +13,7 @@ RDEPENDS:${PN} = "\
     cuda-toolkit \
     gcc-for-nvcc \
     kernel-module-ar0234 \
+    kernel-module-ftdi-sio \
     networkmanager-wifi \
     wpa-supplicant \
     wireless-regdb-static \
