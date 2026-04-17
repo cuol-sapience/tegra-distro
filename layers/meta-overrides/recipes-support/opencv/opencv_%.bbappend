@@ -8,3 +8,5 @@ do_install:append() {
     sed -i 's/^\([[:space:]]*\)find_host_package(CUDA/\1# find_host_package(CUDA/g' "$CONFIG_FILE"
 }
 
+
+PACKAGECONFIG:remove:aarch64 = "tbb"
