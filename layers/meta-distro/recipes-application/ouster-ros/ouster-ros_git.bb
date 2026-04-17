@@ -17,6 +17,7 @@ PV = "0.14.0+git"
 SRC_URI = "git://github.com/ouster-lidar/ouster-ros.git;branch=ros2;protocol=https;subpath=ouster-ros"
 SRCREV = "f56b1a0e0b12985c41d3f2630344fb5c5963f571"
 
+S = "${UNPACKDIR}/ouster-ros"
 
 ROS_BUILD_DEPENDS = " \
     ${ROS_UNRESOLVED_DEP-libtins-dev} \
@@ -59,6 +60,7 @@ ROS_EXPORT_DEPENDS = " \
     sensor-msgs \
     std-msgs \
     std-srvs \
+    tf2-eigen \
     tf2-ros \
 "
 
@@ -84,6 +86,7 @@ ROS_EXEC_DEPENDS = " \
     spdlog \
     std-msgs \
     std-srvs \
+    tf2-eigen \
     tf2-ros \
 "
 
