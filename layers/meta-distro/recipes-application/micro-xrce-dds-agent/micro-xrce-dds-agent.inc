@@ -11,9 +11,9 @@ DEPENDS = "fastcdr2 fastrtps fastdds libtinyxml2 spdlog-ros"
 
 inherit cmake
 
-# extra cmake args: https://github.com/eProsima/Micro-XRCE-DDS-Agent/issues/319#issuecomment-3414294637
-# Specify any options you want to pass to cmake using EXTRA_OECMAKE:
+# Build as static lib to avoid need to LD_PRELOAD spdlog-ros libspdlog (older ver)
 EXTRA_OECMAKE += "\
+    -DBUILD_SHARED_LIBS=OFF \
     -DUAGENT_P2P_PROFILE=OFF \
     -DUAGENT_USE_SYSTEM_FASTCDR=TRUE \
     -DUAGENT_USE_SYSTEM_FASTDDS=TRUE \
