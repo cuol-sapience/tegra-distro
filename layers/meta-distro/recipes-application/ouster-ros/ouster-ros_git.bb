@@ -62,6 +62,7 @@ ROS_EXPORT_DEPENDS = " \
     std-srvs \
     tf2-eigen \
     tf2-ros \
+    libzip \
 "
 
 ROS_BUILDTOOL_EXPORT_DEPENDS = ""
