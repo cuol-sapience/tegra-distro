@@ -14,7 +14,7 @@ ROS_BPN = "ouster_ros"
 
 PV = "0.14.0+git"
 
-SRC_URI = "git://github.com/ouster-lidar/ouster-ros.git;branch=ros2;protocol=https;subpath=ouster-ros"
+SRC_URI = "gitsm://github.com/ouster-lidar/ouster-ros.git;branch=ros2;protocol=https;subpath=ouster-ros"
 SRCREV = "f56b1a0e0b12985c41d3f2630344fb5c5963f571"
 
 S = "${UNPACKDIR}/ouster-ros"
