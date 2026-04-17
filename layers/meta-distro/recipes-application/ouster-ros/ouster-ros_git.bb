@@ -14,10 +14,10 @@ ROS_BPN = "ouster_ros"
 
 PV = "0.14.0+git"
 
-SRC_URI = "gitsm://github.com/ouster-lidar/ouster-ros.git;branch=ros2;protocol=https;subpath=ouster-ros"
+SRC_URI = "gitsm://github.com/ouster-lidar/ouster-ros.git;branch=ros2;protocol=https;destsuffix=git/ouster-ros"
 SRCREV = "f56b1a0e0b12985c41d3f2630344fb5c5963f571"
 
-S = "${UNPACKDIR}/ouster-ros"
+S = "${UNPACKDIR}/git/ouster-ros/ouster-ros"
 
 ROS_BUILD_DEPENDS = " \
     ${ROS_UNRESOLVED_DEP-libtins-dev} \
@@ -40,6 +40,7 @@ ROS_BUILD_DEPENDS = " \
     std-srvs \
     tf2-eigen \
     tf2-ros \
+    fmt \
 "
 
 ROS_BUILDTOOL_DEPENDS = " \
@@ -63,6 +64,7 @@ ROS_EXPORT_DEPENDS = " \
     tf2-eigen \
     tf2-ros \
     libzip \
+    fmt \
 "
 
 ROS_BUILDTOOL_EXPORT_DEPENDS = ""
@@ -89,6 +91,7 @@ ROS_EXEC_DEPENDS = " \
     std-srvs \
     tf2-eigen \
     tf2-ros \
+    fmt \
 "
 
 # Currently informational only -- see http://www.ros.org/reps/rep-0149.html#dependency-tags.
@@ -106,3 +109,18 @@ RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 ROS_BUILD_TYPE = "ament_cmake"
 
 inherit ros_${ROS_BUILD_TYPE}
+
+FILES:${PN} += " \
+    /opt/ros/humble/lib/libos*.so \
+    /opt/ros/humble/lib/libouster*.so \
+"
+
+FILES:${PN}-dev = " \
+    /opt/ros/humble/include/* \
+    /opt/ros/humble/share/ouster_ros/cmake/* \
+"   
+
+EXTRA_OECMAKE += " \
+    -DCMAKE_NO_SYSTEM_FROM_IMPORTED=ON \
+    -DSPDLOG_FMT_EXTERNAL=ON \
+"
