@@ -14,8 +14,11 @@ ROS_BPN = "ouster_ros"
 
 PV = "0.14.0+git"
 
-SRC_URI = "gitsm://github.com/ouster-lidar/ouster-ros.git;branch=ros2;protocol=https;destsuffix=git/ouster-ros"
-SRCREV = "f56b1a0e0b12985c41d3f2630344fb5c5963f571"
+SRC_URI = "gitsm://github.com/ouster-lidar/ouster-ros.git;branch=ros2;protocol=https;destsuffix=git/ouster-ros \
+           file://0001-use-system-spdlog.patch;patchdir=${UNPACKDIR}/git/ouster-ros \
+           file://0002-remove-vendored-spdlog.patch;patchdir=${UNPACKDIR}/git/ouster-ros \
+          "
+SRCREV = "e0fd263034c2c25a20bac9973bd984a566bee833"
 
 S = "${UNPACKDIR}/git/ouster-ros/ouster-ros"
 
@@ -122,5 +125,8 @@ FILES:${PN}-dev = " \
 
 EXTRA_OECMAKE += " \
     -DCMAKE_NO_SYSTEM_FROM_IMPORTED=ON \
+    -Dspdlog_DIR=${STAGING_DIR_TARGET}/usr/lib/cmake/spdlog \
     -DSPDLOG_FMT_EXTERNAL=ON \
 "
+
+CXXFLAGS:append = " -DSPDLOG_FMT_EXTERNAL"
