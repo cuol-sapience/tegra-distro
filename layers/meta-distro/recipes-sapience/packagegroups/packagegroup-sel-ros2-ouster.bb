@@ -14,4 +14,5 @@ RDEPENDS:${PN} = "\
      ouster-ros \
      ouster-sensor-msgs \
      ouster-msgs \
+     dlio \
 "
