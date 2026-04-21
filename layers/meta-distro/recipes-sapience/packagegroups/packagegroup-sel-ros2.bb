@@ -26,6 +26,23 @@ ROS2_PKG_CAMERA = "\
 ROS2_PKG_CLI = "\
      ros2cli-common-extensions \
      ros2bag \
+     rosbag2 \
+     rosbag2-compression \
+     rosbag2-compression-zstd \
+     rosbag2-cpp \
+     rosbag2-interfaces \
+     rosbag2-performance-benchmarking \
+     rosbag2-py \
+     rosbag2-storage \
+     rosbag2-storage-broll \
+     rosbag2-storage-default-plugins \
+     rosbag2-storage-mcap \
+     rosbag2-storage-mcap-testdata \
+     rosbag2-test-common \
+     rosbag2-tests \
+     rosbag2-to-video \
+     rosbag2-transport \
+     rosbag2rawlog \
 "
 
 
