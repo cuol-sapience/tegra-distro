@@ -22,7 +22,6 @@ ROS2_PKG_CAMERA = "\
      aruco-pose-estimator \
 "
 
-
 ROS2_PKG_CLI = "\
      ros2cli-common-extensions \
      ros2bag \
@@ -34,17 +33,12 @@ ROS2_PKG_CLI = "\
      rosbag2-performance-benchmarking \
      rosbag2-py \
      rosbag2-storage \
-     rosbag2-storage-broll \
      rosbag2-storage-default-plugins \
-     rosbag2-storage-mcap \
-     rosbag2-storage-mcap-testdata \
      rosbag2-test-common \
      rosbag2-tests \
      rosbag2-to-video \
      rosbag2-transport \
-     rosbag2rawlog \
 "
-
 
 RDEPENDS:${PN} = "\
      ros-core \
