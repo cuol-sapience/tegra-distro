@@ -15,9 +15,15 @@ TEMPLATECONF=$PWD/repos/openembedded-core/meta/conf/templates/default/  source .
 ## Building
 
 ```
-bitbake mc:arm64-qemu:sapience-image-minimal
-bitbake mc:arm64-qemu:sapience-image-gui
+bitbake mc:arm64-orin-nano:sel-edge-image-gui
+bitbake mc:arm64-orin-nano:package-index
 ```
+
+### OCI (Container)
+
+```
+bitbake mc:amd64-qemu:sel-edge-container-core
+bitbake mc:amd64-qemu:package-index
 
 ---
 
