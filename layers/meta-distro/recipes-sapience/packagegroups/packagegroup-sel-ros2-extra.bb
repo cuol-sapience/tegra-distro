@@ -29,5 +29,5 @@ RDEPENDS:${PN} = "\
 	topic-statistics-demo \
 	examples-rclcpp-minimal-publisher \
 	examples-rclcpp-minimal-subscriber \
-	ros-tools \
+	topic-tools \
 "
