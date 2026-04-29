@@ -32,11 +32,17 @@ Local changes on top of upstream ADCAM patch:
   has its own jiffies timestamp and is throttled to one MCU write per
   16ms, preventing rapid AE changes from overwhelming the MCU while
   still allowing all three controls to update independently.
+- arducam_wait_for_idle() wall-clock bounding: replaced iteration-count
+  loop with ktime_get() deadline so the actual wait never exceeds
+  timeout_ms regardless of the I2C hardware timeout per transfer
+  (~124ms on Tegra). Also bail immediately after 3 consecutive I2C
+  errors so a dead MCU stops hammering the shared cam_i2c bus with
+  back-to-back recovery cycles, which was causing ethernet carrier loss.
 ---
  nvidia-oot/drivers/media/i2c/Makefile             |   1 +
- nvidia-oot/drivers/media/i2c/arducam_jetvariety.c | 985 +++++++++++++++++++++++++
+ nvidia-oot/drivers/media/i2c/arducam_jetvariety.c | 999 +++++++++++++++++++++++++
  nvidia-oot/drivers/media/i2c/arducam_jetvariety.h | 175 +++++
- 3 files changed, 1146 insertions(+)
+ 3 files changed, 1160 insertions(+)
  create mode 100644 nvidia-oot/drivers/media/i2c/arducam_jetvariety.c
  create mode 100644 nvidia-oot/drivers/media/i2c/arducam_jetvariety.h
 
@@ -57,7 +63,7 @@ new file mode 100644
 index 00000000..c8fc40ca
 --- /dev/null
 +++ b/nvidia-oot/drivers/media/i2c/arducam_jetvariety.c
-@@ -0,0 +1,1034 @@
+@@ -0,0 +1,1048 @@
 +/*
 + * arducam.c - arducam sensor driver
 + *
@@ -708,18 +714,32 @@ index 00000000..c8fc40ca
 +static int arducam_wait_for_idle(struct i2c_client *client,
 +				struct device *dev, int interval_ms, int timeout_ms)
 +{
++	ktime_t deadline = ktime_add_ms(ktime_get(), timeout_ms);
 +	u32 value = 0xFFFFFFFF;
-+	int count = 0;
-+	int max_count = timeout_ms / interval_ms;
++	int err_count = 0;
 +
-+	while (count++ < max_count) {
++	/*
++	 * Use wall-clock time, not iteration count. When the MCU is
++	 * unresponsive, each i2c_transfer eats the full hardware timeout
++	 * (~124ms on Tegra), so an iteration-counted loop would run for
++	 * 100x longer than intended and hammer the shared I2C bus with
++	 * repeated recovery cycles, disrupting other bus clients.
++	 */
++	while (ktime_before(ktime_get(), deadline)) {
 +		int ret = arducam_readl_reg(client, SYSTEM_IDLE_REG, &value);
-+		if (!ret && value == 0) {
-+			dev_dbg(dev, "%s: MCU idle after %d ms\n",
-+				__func__, count * interval_ms);
-+			return 0;
++		if (!ret) {
++			if (value == 0)
++				return 0;
++			err_count = 0;
++			msleep(interval_ms);
++		} else {
++			/* Stop hammering the bus if MCU is unreachable */
++			if (++err_count >= 3) {
++				dev_warn(dev, "%s: MCU unreachable after %d I2C errors\n",
++					 __func__, err_count);
++				return -EIO;
++			}
 +		}
-+		msleep(interval_ms);
 +	}
 +	dev_warn(dev, "%s: MCU not idle after %d ms (last=0x%08x)\n",
 +		 __func__, timeout_ms, value);
