@@ -10,5 +10,6 @@ PACKAGES = "${PN}"
 
 RDEPENDS:${PN} = "\
     pytorch \
+    python3-torch \
     nvblox \
 "
