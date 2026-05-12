@@ -81,7 +81,7 @@ new file mode 100644
 index 00000000..c8fc40ca
 --- /dev/null
 +++ b/nvidia-oot/drivers/media/i2c/arducam_jetvariety.c
-@@ -0,0 +1,1045 @@
+@@ -0,0 +1,1044 @@
 +/*
 + * arducam.c - arducam sensor driver
 + *
