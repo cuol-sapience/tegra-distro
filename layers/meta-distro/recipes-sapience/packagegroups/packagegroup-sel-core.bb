@@ -16,6 +16,7 @@ RDEPENDS:${PN} = "\
     packagegroup-sel-devel \
     packagegroup-sel-optitrack \
     packagegroup-sel-sdk \
+    python3-pip \
 "
 
 RDEPENDS:${PN}:append:jetson-orin-nano-devkit = " \

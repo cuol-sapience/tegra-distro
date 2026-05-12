@@ -12,6 +12,4 @@ RDEPENDS:${PN} = "\
     pytorch \
     python3-torch \
     nvblox \
-    python3-pip \
-    python3-scipy \
 "
