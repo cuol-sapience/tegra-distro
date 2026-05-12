@@ -46,13 +46,13 @@ Local changes on top of upstream ADCAM patch:
   concurrently. The static storage class also caused both camera
   instances to share the flag, so camera 0 and camera 1 races against
   each other even on different CSI ports.
-- Remove arducam_wait_for_idle() from AE callbacks (set_gain,
-  set_exposure, set_frame_rate): each poll attempt costs the full I2C
-  hardware timeout (~124ms) when the MCU is busy; with two cameras
-  firing AE updates at up to 62Hz, this produced cascading bus storms
-  that knocked out ethernet and triggered set_mode failures. The rate
-  limiter already prevents write floods; the MCU handles sequential
-  writes without pre-flight polling.
+- AE callbacks (set_gain, set_exposure, set_frame_rate): replaced the
+  unconditional arducam_wait_for_idle(500ms) with a fail-fast variant
+  (200ms timeout): if the MCU is not idle within 200ms the update is
+  silently dropped rather than blocking the I2C bus. Rate limiter raised
+  from 16ms to 50ms (20Hz max per control) to reduce write pressure on
+  the MCU; at 16ms the MCU was overwhelmed by rapid AE swings (e.g.
+  from a bright light source) and stopped responding to I2C entirely.
 - set_mode now checks arducam_wait_for_idle() return and bails early
   instead of writing PIXFORMAT_INDEX_REG and RESOLUTION_INDEX_REG to
   an unresponsive MCU, preventing the error cascade seen in logs.
@@ -81,7 +81,7 @@ new file mode 100644
 index 00000000..c8fc40ca
 --- /dev/null
 +++ b/nvidia-oot/drivers/media/i2c/arducam_jetvariety.c
-@@ -0,0 +1,1044 @@
+@@ -0,0 +1,1050 @@
 +/*
 + * arducam.c - arducam sensor driver
 + *
@@ -349,7 +349,9 @@ index 00000000..c8fc40ca
 +
 +	if (!priv->streaming)
 +		return 0;
-+	if (time_before(jiffies, priv->last_gain_jiffies + msecs_to_jiffies(16)))
++	if (time_before(jiffies, priv->last_gain_jiffies + msecs_to_jiffies(50)))
++		return 0;
++	if (arducam_wait_for_idle(priv->i2c_client, dev, 5, 200) < 0)
 +		return 0;
 +	if (val < mode->control_properties.min_gain_val)
 +		val = mode->control_properties.min_gain_val;
@@ -381,7 +383,9 @@ index 00000000..c8fc40ca
 +
 +	if (!priv->streaming)
 +		return 0;
-+	if (time_before(jiffies, priv->last_framerate_jiffies + msecs_to_jiffies(16)))
++	if (time_before(jiffies, priv->last_framerate_jiffies + msecs_to_jiffies(50)))
++		return 0;
++	if (arducam_wait_for_idle(priv->i2c_client, dev, 5, 200) < 0)
 +		return 0;
 +
 +	/* Use cached vblank limits from set_mode instead of querying MCU */
@@ -422,7 +426,9 @@ index 00000000..c8fc40ca
 +
 +	if (!priv->streaming)
 +		return 0;
-+	if (time_before(jiffies, priv->last_exposure_jiffies + msecs_to_jiffies(16)))
++	if (time_before(jiffies, priv->last_exposure_jiffies + msecs_to_jiffies(50)))
++		return 0;
++	if (arducam_wait_for_idle(priv->i2c_client, tc_dev->dev, 5, 200) < 0)
 +		return 0;
 +	coarse_time = val*mode->signal_properties.pixel_clock.val
 +		/ mode->control_properties.exposure_factor
