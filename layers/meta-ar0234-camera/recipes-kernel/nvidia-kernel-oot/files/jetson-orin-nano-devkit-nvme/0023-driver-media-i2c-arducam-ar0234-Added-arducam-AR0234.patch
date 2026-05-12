@@ -81,7 +81,7 @@ new file mode 100644
 index 00000000..c8fc40ca
 --- /dev/null
 +++ b/nvidia-oot/drivers/media/i2c/arducam_jetvariety.c
-@@ -0,0 +1,1050 @@
+@@ -0,0 +1,1060 @@
 +/*
 + * arducam.c - arducam sensor driver
 + *
@@ -351,6 +351,7 @@ index 00000000..c8fc40ca
 +		return 0;
 +	if (time_before(jiffies, priv->last_gain_jiffies + msecs_to_jiffies(50)))
 +		return 0;
++	priv->last_gain_jiffies = jiffies;
 +	if (arducam_wait_for_idle(priv->i2c_client, dev, 5, 200) < 0)
 +		return 0;
 +	if (val < mode->control_properties.min_gain_val)
@@ -385,6 +386,7 @@ index 00000000..c8fc40ca
 +		return 0;
 +	if (time_before(jiffies, priv->last_framerate_jiffies + msecs_to_jiffies(50)))
 +		return 0;
++	priv->last_framerate_jiffies = jiffies;
 +	if (arducam_wait_for_idle(priv->i2c_client, dev, 5, 200) < 0)
 +		return 0;
 +
@@ -428,6 +430,7 @@ index 00000000..c8fc40ca
 +		return 0;
 +	if (time_before(jiffies, priv->last_exposure_jiffies + msecs_to_jiffies(50)))
 +		return 0;
++	priv->last_exposure_jiffies = jiffies;
 +	if (arducam_wait_for_idle(priv->i2c_client, tc_dev->dev, 5, 200) < 0)
 +		return 0;
 +	coarse_time = val*mode->signal_properties.pixel_clock.val
@@ -742,9 +745,16 @@ index 00000000..c8fc40ca
 +	 */
 +	while (ktime_before(ktime_get(), deadline)) {
 +		int ret = arducam_readl_reg(client, SYSTEM_IDLE_REG, &value);
-+		if (!ret) {
-+			if (value == 0)
-+				return 0;
++		if (!ret && value == 0)
++			return 0;
++		/*
++		 * Treat 0xFFFFFFFF as an error: it means the bus is floating
++		 * (pull-ups only) — the MCU ACKed the address but didn't drive
++		 * the data lines. Count it the same as an I2C transfer error so
++		 * the 3-consecutive-error bail fires instead of looping until
++		 * the wall-clock deadline while resetting err_count each time.
++		 */
++		if (!ret && value != 0xFFFFFFFF) {
 +			err_count = 0;
 +			msleep(interval_ms);
 +		} else {
