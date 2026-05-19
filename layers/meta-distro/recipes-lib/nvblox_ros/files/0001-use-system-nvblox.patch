@@ -1,0 +1,57 @@
+Use system nvblox package instead of building from nvblox_core submodule
+
+Removes the in-tree add_subdirectory(nvblox_core) build and replaces it with
+find_package(nvblox REQUIRED), consuming the pre-built system nvblox. Also
+removes install() rules for nvblox targets (already installed by the nvblox
+recipe) and fuse_cusfm which is part of nvblox_core, not nvblox_ros.
+
+Upstream-Status: Inappropriate [OE-specific]
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 0000000..0000001 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -29,7 +29,6 @@ message( STATUS "CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}" )
+ # Setup dependencies. Note that will also setup cuda architecture flags in CMAKE_CUDA_ARCHITECTURES
+ find_package(ament_cmake_auto REQUIRED)
+ ament_auto_find_build_dependencies()
+-include(nvblox_core/cmake/cuda/setup_compute_capability.cmake)
+
+ # Default behavior is to build for all supported CUDA architectures. In order to improve build
+ # speed we can select to build only for the native architecture by using
+@@ -44,16 +43,8 @@ else()
+ endif()
+
+
+-# Don't build the pytorch wrapper
+-set(BUILD_PYTORCH_WRAPPER false)
+-
+-# Use system version of these dependencies to avoid conflicts
+-set(USE_SYSTEM_GLOG true)
+-set(USE_SYSTEM_GFLAGS true)
+-set(USE_SYSTEM_GTEST true)
+-set(USE_SYSTEM_BENCHMARK true)
+-
+-# The core nvblox lib is built together with nvblox_ros
+-add_subdirectory(nvblox_core)
++# Use the pre-built system nvblox package instead of in-tree submodule
++find_package(nvblox REQUIRED)
+
+ ################
+ # DEPENDENCIES #
+@@ -131,7 +122,7 @@ set_target_properties(fuser_node PROPERTIES
+ # Install the library target.
+ install(
+-  TARGETS ${PROJECT_NAME}_lib nvblox_lib nvblox_eigen nvblox_datasets
++  TARGETS ${PROJECT_NAME}_lib
+   EXPORT ${PROJECT_NAME}Targets
+   LIBRARY DESTINATION lib
+   ARCHIVE DESTINATION lib
+@@ -141,7 +132,7 @@ install(
+
+ # Install nodes which live in lib for some reason.
+ install(
+-  TARGETS nvblox_node fuser_node fuse_cusfm
++  TARGETS nvblox_node fuser_node
+   DESTINATION lib/${PROJECT_NAME}
+ )

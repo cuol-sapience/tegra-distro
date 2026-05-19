@@ -12,4 +12,7 @@ RDEPENDS:${PN} = "\
     pytorch \
     python3-torch \
     nvblox \
+    nvblox-ros \
+    nvblox-rviz-plugin \
+    nvblox-ros-python-utils \
 "
