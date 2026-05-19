@@ -13,6 +13,7 @@ ROS_BUILD_DEPENDS = " \
     std-msgs \
     geometry-msgs \
     rosidl-default-generators \
+    rosidl-default-runtime \
 "
 
 ROS_BUILDTOOL_DEPENDS = " \

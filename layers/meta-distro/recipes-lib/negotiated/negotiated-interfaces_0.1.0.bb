@@ -10,6 +10,7 @@ S = "${UNPACKDIR}/git/negotiated/negotiated_interfaces"
 
 ROS_BUILD_DEPENDS = " \
     rosidl-default-generators \
+    rosidl-default-runtime \
 "
 
 ROS_BUILDTOOL_DEPENDS = " \

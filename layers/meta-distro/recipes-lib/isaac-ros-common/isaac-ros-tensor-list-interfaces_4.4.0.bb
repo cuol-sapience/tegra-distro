@@ -12,6 +12,7 @@ ROS_BUILD_DEPENDS = " \
     isaac-ros-common \
     std-msgs \
     rosidl-default-generators \
+    rosidl-default-runtime \
 "
 
 ROS_BUILDTOOL_DEPENDS = " \
