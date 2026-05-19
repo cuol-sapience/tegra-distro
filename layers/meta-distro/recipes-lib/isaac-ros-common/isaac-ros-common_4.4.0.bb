@@ -20,6 +20,7 @@ ROS_BUILD_DEPENDS = " \
 
 ROS_BUILDTOOL_DEPENDS = " \
     ament-cmake-auto-native \
+    python3-pyyaml-native \
 "
 
 ROS_EXEC_DEPENDS = " \
