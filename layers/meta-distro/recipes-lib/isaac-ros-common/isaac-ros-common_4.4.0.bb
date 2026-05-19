@@ -8,6 +8,10 @@ inherit cuda-available
 ROS_CN = "isaac-ros-common"
 ROS_BPN = "isaac_ros_common"
 
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+
+SRC_URI:append = " file://0001-make-vpi-optional.patch;patchdir=${UNPACKDIR}/git/isaac_ros_common/isaac_ros_common"
+
 S = "${UNPACKDIR}/git/isaac_ros_common/isaac_ros_common"
 
 ROS_BUILD_DEPENDS = " \
