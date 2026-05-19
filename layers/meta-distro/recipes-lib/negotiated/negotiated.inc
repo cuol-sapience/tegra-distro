@@ -14,3 +14,8 @@ EXTRA_OECMAKE += "-DCMAKE_NO_SYSTEM_FROM_IMPORTED=ON"
 INSANE_SKIP:${PN} += "buildpaths"
 INSANE_SKIP:${PN}-dev += "buildpaths"
 INSANE_SKIP:${PN}-dbg += "buildpaths"
+
+FILES_SOLIBSDEV = ""
+FILES:${PN} += " \
+    ${libdir}/lib*${SOLIBSDEV} \
+"
