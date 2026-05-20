@@ -8,6 +8,8 @@ ROS_BPN = "isaac_ros_tensor_list_interfaces"
 
 S = "${UNPACKDIR}/git/isaac_ros_common/isaac_ros_tensor_list_interfaces"
 
+inherit cuda-available
+
 ROS_BUILD_DEPENDS = " \
     isaac-ros-common \
     std-msgs \
