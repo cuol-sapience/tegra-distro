@@ -1,0 +1,36 @@
+Make VPI dependency optional
+
+VPI (Vision Programming Interface) is not available on all Jetson targets
+(e.g. Orin Nano on JetPack 6.2.2). Make the find_package call quiet only
+link against vpi if it was found.
+
+Upstream-Status: Inappropriate [OE-specific]
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index e3005f0..cb50640 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -87,7 +87,7 @@ ament_index_register_resource(cumotion CONTENT share/${PROJECT_NAME}/cumotion)
+ 
+ # Dependencies
+ find_package(Eigen3 3.3 REQUIRED NO_MODULE)
+-find_package(vpi REQUIRED)
++find_package(vpi QUIET)
+ find_package(yaml-cpp)
+ 
+ # NitrosNode
+@@ -103,9 +103,13 @@ ament_auto_add_library(${PROJECT_NAME} SHARED
+ )
+ target_link_libraries(${PROJECT_NAME}
+   Eigen3::Eigen
+-  vpi
+   yaml-cpp
+ )
++
++if(vpi_FOUND)
++  target_link_libraries(${PROJECT_NAME} vpi)  
++endif()
++
+ set_target_properties(${PROJECT_NAME} PROPERTIES
+   BUILD_WITH_INSTALL_RPATH TRUE
+   BUILD_RPATH_USE_ORIGIN TRUE
