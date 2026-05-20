@@ -8,20 +8,20 @@ Fix cross-compilation issues in isaac-ros-tensor-list-interfaces
 Upstream-Status: Inappropriate [OE-specific]
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 3201fdb..b662eee 100644
+index 3201fdb..e207333 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -48,6 +48,13 @@ endif()
+@@ -47,8 +47,10 @@ endif()
+ 
  
  # Embed versioning information into installed files
- ament_index_get_resource(ISAAC_ROS_COMMON_CMAKE_PATH isaac_ros_common_cmake_path isaac_ros_common)
-+
-+if(CMAKE_CROSSCOMPILING)
-+  # ament_index_get_resource returns an absolute target path; prefix with
-+  # CMAKE_SYSROOT so the include resolves inside the staged recipe sysroot.
-+  set(ISAAC_ROS_COMMON_CMAKE_PATH "${CMAKE_SYSROOT}${ISAAC_ROS_COMMON_CMAKE_PATH}")
+-ament_index_get_resource(ISAAC_ROS_COMMON_CMAKE_PATH isaac_ros_common_cmake_path isaac_ros_common)
+-include("${ISAAC_ROS_COMMON_CMAKE_PATH}/isaac_ros_common-version-info.cmake")
+-generate_version_info(${PROJECT_NAME})
++if(NOT CMAKE_CROSSCOMPILING)
++  ament_index_get_resource(ISAAC_ROS_COMMON_CMAKE_PATH isaac_ros_common_cmake_path isaac_ros_common)
++  include("${ISAAC_ROS_COMMON_CMAKE_PATH}/isaac_ros_common-version-info.cmake")
++  generate_version_info(${PROJECT_NAME})
 +endif()
-+
- include("${ISAAC_ROS_COMMON_CMAKE_PATH}/isaac_ros_common-version-info.cmake")
- generate_version_info(${PROJECT_NAME})
-
+ 
+ ament_auto_package()
