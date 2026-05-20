@@ -38,13 +38,13 @@ index 3197738..397ac51 100644
  set_target_properties(Core PROPERTIES
    INTERFACE_INCLUDE_DIRECTORIES
 -    "$<INSTALL_PREFIX>/share/${PROJECT_NAME}/gxf/include"
-+    "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/gxf/include"
++    "$<INSTALL_INTERFACE:share/${PROJECT_NAME}/gxf/include>"
  )
  set_property(TARGET Core PROPERTY
    INTERFACE_LINK_LIBRARIES
      magic_enum::magic_enum
 -    "$<INSTALL_PREFIX>/lib/libgxf_core.so"
-+    "${CMAKE_INSTALL_PREFIX}/lib/libgxf_core.so"
++    "$<INSTALL_INTERFACE:lib/libgxf_core.so>"
  )
  
  # Logger
@@ -52,10 +52,10 @@ index 3197738..397ac51 100644
  set_target_properties(Logger PROPERTIES
    INTERFACE_LINK_LIBRARIES
 -    "$<INSTALL_PREFIX>/share/${PROJECT_NAME}/gxf/lib/logger/libgxf_logger.so"
-+    "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/gxf/lib/logger/libgxf_logger.so"
++    "$<INSTALL_INTERFACE:share/${PROJECT_NAME}/gxf/lib/logger/libgxf_logger.so>"
    INTERFACE_INCLUDE_DIRECTORIES
 -    "$<INSTALL_PREFIX>/share/${PROJECT_NAME}/gxf/include"
-+    "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/gxf/include"
++    "$<INSTALL_INTERFACE:share/${PROJECT_NAME}/gxf/include>"
  )
  
  # Std
@@ -63,10 +63,10 @@ index 3197738..397ac51 100644
  set_target_properties(Std PROPERTIES
    INTERFACE_LINK_LIBRARIES
 -    "$<INSTALL_PREFIX>/share/${PROJECT_NAME}/gxf/lib/std/libgxf_std.so"
-+    "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/gxf/lib/std/libgxf_std.so"
++    "$<INSTALL_INTERFACE:share/${PROJECT_NAME}/gxf/lib/std/libgxf_std.so>"
    INTERFACE_INCLUDE_DIRECTORIES
 -    "$<INSTALL_PREFIX>/share/${PROJECT_NAME}/gxf/include"
-+    "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/gxf/include"
++    "$<INSTALL_INTERFACE:share/${PROJECT_NAME}/gxf/include>"
  )
  
  # Multimedia
@@ -74,10 +74,10 @@ index 3197738..397ac51 100644
  set_target_properties(Multimedia PROPERTIES
    INTERFACE_LINK_LIBRARIES
 -    "$<INSTALL_PREFIX>/share/${PROJECT_NAME}/gxf/lib/multimedia/libgxf_multimedia.so"
-+    "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/gxf/lib/multimedia/libgxf_multimedia.so"
++    "$<INSTALL_INTERFACE:share/${PROJECT_NAME}/gxf/lib/multimedia/libgxf_multimedia.so>"
    INTERFACE_INCLUDE_DIRECTORIES
 -    "$<INSTALL_PREFIX>/share/${PROJECT_NAME}/gxf/include"
-+    "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/gxf/include"
++    "$<INSTALL_INTERFACE:share/${PROJECT_NAME}/gxf/include>"
  )
  
  # Serialization
@@ -85,10 +85,10 @@ index 3197738..397ac51 100644
  set_target_properties(Serialization PROPERTIES
    INTERFACE_LINK_LIBRARIES
 -    "$<INSTALL_PREFIX>/share/${PROJECT_NAME}/gxf/lib/serialization/libgxf_serialization.so"
-+    "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/gxf/lib/serialization/libgxf_serialization.so"
++    "$<INSTALL_INTERFACE:share/${PROJECT_NAME}/gxf/lib/serialization/libgxf_serialization.so>"
    INTERFACE_INCLUDE_DIRECTORIES
 -    "$<INSTALL_PREFIX>/share/${PROJECT_NAME}/gxf/include"
-+    "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/gxf/include"
++    "$<INSTALL_INTERFACE:share/${PROJECT_NAME}/gxf/include>"
  )
  
  # Cuda
@@ -96,10 +96,10 @@ index 3197738..397ac51 100644
  set_target_properties(Cuda PROPERTIES
    INTERFACE_LINK_LIBRARIES
 -    "$<INSTALL_PREFIX>/share/${PROJECT_NAME}/gxf/lib/cuda/libgxf_cuda.so"
-+    "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/gxf/lib/cuda/libgxf_cuda.so"
++    "$<INSTALL_INTERFACE:share/${PROJECT_NAME}/gxf/lib/cuda/libgxf_cuda.so>"
    INTERFACE_INCLUDE_DIRECTORIES
 -    "$<INSTALL_PREFIX>/share/${PROJECT_NAME}/gxf/include"
-+    "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/gxf/include"
++    "$<INSTALL_INTERFACE:share/${PROJECT_NAME}/gxf/include>"
  )
  
  install(TARGETS Core Logger Std Multimedia Serialization Cuda
