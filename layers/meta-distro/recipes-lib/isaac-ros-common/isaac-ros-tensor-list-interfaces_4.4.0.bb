@@ -36,3 +36,8 @@ RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
 ROS_BUILD_TYPE = "ament_cmake"
 inherit ros_${ROS_BUILD_TYPE}
+
+FILES_SOLIBSDEV = ""
+FILES:${PN} += " \
+    ${libdir}/lib*${SOLIBSDEV} \
+"
