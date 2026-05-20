@@ -25,6 +25,7 @@ ROS_BUILDTOOL_DEPENDS = " \
 
 ROS_EXEC_DEPENDS = " \
     rclcpp \
+    bash \
 "
 
 DEPENDS = "${ROS_BUILD_DEPENDS} ${ROS_BUILDTOOL_DEPENDS}"

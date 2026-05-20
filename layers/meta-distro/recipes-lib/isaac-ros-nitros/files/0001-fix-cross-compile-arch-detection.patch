@@ -11,19 +11,20 @@ aarch64 targets.
 Upstream-Status: Inappropriate [OE-specific]
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 0000000..0000001 100644
+index 3197738..83cd57b 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -23,7 +23,7 @@ project(isaac_ros_gxf)
+@@ -21,7 +21,7 @@ project(isaac_ros_gxf)
  # Add option for overriding GXF core library directory
  option(GXF_CORE_LIB_DIR_OVERRIDE "Override path for GXF core library directory" "")
-
+ 
 -execute_process(COMMAND uname -m COMMAND tr -d '\n' OUTPUT_VARIABLE ARCHITECTURE)
 +set(ARCHITECTURE ${CMAKE_SYSTEM_PROCESSOR})
  message( STATUS "Architecture: ${ARCHITECTURE}" )
-
+ 
  find_package(ament_cmake_auto REQUIRED)
-@@ -45,13 +45,7 @@ endif()
+@@ -43,13 +43,7 @@ if( ${ARCHITECTURE} STREQUAL "x86_64" )
+   install(FILES gxf/core/lib/gxf_x86_64_cuda_13_0/multimedia/libgxf_multimedia.so DESTINATION lib)
    install(FILES gxf/core/lib/gxf_x86_64_cuda_13_0/cuda/libgxf_cuda.so DESTINATION lib)
  elseif( ${ARCHITECTURE} STREQUAL "aarch64" )
 -  if(CMAKE_DEVICE STREQUAL "sbsa")
