@@ -8,7 +8,7 @@ ROS_BPN = "gxf_isaac_optimizer"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-SRC_URI:append = " file://0003-optimizer-cross-compile.patcj;patchdir=${UNPACKDIR}/git/isaac_ros_nitros/isaac_ros_gxf_extensions/gxf_isaac_optimizer"
+SRC_URI:append = " file://0003-optimizer-cross-compile.patch;patchdir=${UNPACKDIR}/git/isaac_ros_nitros/isaac_ros_gxf_extensions/gxf_isaac_optimizer"
 
 S = "${UNPACKDIR}/git/isaac_ros_nitros/isaac_ros_gxf_extensions/gxf_isaac_optimizer"
 
