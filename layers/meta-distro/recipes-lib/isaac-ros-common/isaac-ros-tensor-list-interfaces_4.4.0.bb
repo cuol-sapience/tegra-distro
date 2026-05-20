@@ -6,6 +6,10 @@ HOMEPAGE = "https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_common"
 ROS_CN = "isaac-ros-tensor-list-interfaces"
 ROS_BPN = "isaac_ros_tensor_list_interfaces"
 
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+
+SRC_URI:append = " file://0002-cross-compile-ament-resource-fix.patch;patchdir=${UNPACKDIR}/git/isaac_ros_common/isaac_ros_tensor_list_interfaces"
+
 S = "${UNPACKDIR}/git/isaac_ros_common/isaac_ros_tensor_list_interfaces"
 
 inherit cuda-available

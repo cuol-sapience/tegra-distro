@@ -1,0 +1,23 @@
+Fix cross-compilation issues in isaac-ros-tensor-list-interfaces
+
+1. ament_index_get_resource returns an absolute target path
+   (/opt/ros/humble/...) which does not exist on the build host during
+   cross-compilation. Prefix with CMAKE_SYSROOT (set to ${RECIPE_SYSROOT} by
+   the OE cmake toolchain) so the include resolves to the staged sysroot.
+
+Upstream-Status: Inappropriate [OE-specific]
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 3201fdb..b662eee 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -48,6 +48,13 @@ endif()
+ 
+ # Embed versioning information into installed files
+ ament_index_get_resource(ISAAC_ROS_COMMON_CMAKE_PATH isaac_ros_common_cmake_path isaac_ros_common)
++
++if(CMAKE_CROSSCOMPILING)
++  # ament_index_get_resource returns an absolute target path; prefix with
++  # CMAKE_SYSROOT so the include resolves inside the staged recipe sysroot.
++  set(ISAAC_ROS_COMMON_CMAKE_PATH "${CMAKE_SYSROOT}${ISAAC_ROS_COMMON_CMAKE_PATH}")
++endif()
