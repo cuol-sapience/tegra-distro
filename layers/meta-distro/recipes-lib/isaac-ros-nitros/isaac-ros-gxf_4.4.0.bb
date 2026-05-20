@@ -26,6 +26,13 @@ ROS_BUILDTOOL_DEPENDS = " \
 ROS_EXEC_DEPENDS = " \
     magic-enum \
     ucx \
+    numactl \
+    python3 \
+    cuda-cudart \
+    libnpp \
+    libcublas \
+    tegra-libraries-nvsci \
+    cuda-nvtx \
 "
 
 DEPENDS = "${ROS_BUILD_DEPENDS} ${ROS_BUILDTOOL_DEPENDS}"
@@ -33,3 +40,14 @@ RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
 ROS_BUILD_TYPE = "ament_cmake"
 inherit ros_${ROS_BUILD_TYPE}
+
+# Pre-built GXF .so files have no versioned soname — keep them in the main package
+FILES_SOLIBSDEV = ""
+FILES:${PN} += " \
+    ${libdir}/lib*${SOLIBSDEV} \
+"
+
+# meta-tegra CUDA packages install to /usr/local/cuda-*/ and don't register
+# in the OE shlibs database, so file-rdeps is a false negative here
+INSANE_SKIP:${PN} += "file-rdeps"
+INSANE_SKIP:${PN}-dev += "dev-elf"
