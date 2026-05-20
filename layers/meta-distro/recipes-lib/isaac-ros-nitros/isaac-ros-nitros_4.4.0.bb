@@ -13,9 +13,6 @@ SRC_URI:append = " file://0002-make-vpi-optional.patch;patchdir=${UNPACKDIR}/git
 
 S = "${UNPACKDIR}/git/isaac_ros_nitros/isaac_ros_nitros"
 
-# All gxf_isaac_* cmake targets (optimizer, message_compositor, gxf_helpers,
-# sight, atlas) are pre-built .so files installed by the isaac_ros_gxf package —
-# they are not separate ROS packages.
 ROS_BUILD_DEPENDS = " \
     negotiated \
     rclcpp \
@@ -23,6 +20,7 @@ ROS_BUILD_DEPENDS = " \
     std-msgs \
     diagnostic-msgs \
     isaac-ros-gxf \
+    gxf-isaac-optimizer \
     ament-index-cpp \
     isaac-ros-common \
     libeigen \
@@ -42,6 +40,7 @@ ROS_EXEC_DEPENDS = " \
     std-msgs \
     diagnostic-msgs \
     isaac-ros-gxf \
+    gxf-isaac-optimizer \
     ament-index-cpp \
     libeigen \
     yaml-cpp \

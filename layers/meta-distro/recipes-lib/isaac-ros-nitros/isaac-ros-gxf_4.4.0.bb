@@ -48,6 +48,9 @@ FILES:${PN} += " \
 "
 
 # meta-tegra CUDA packages install to /usr/local/cuda-*/ and don't register
-# in the OE shlibs database, so file-rdeps is a false negative here
+# in the OE shlibs database, so file-rdeps is a false negative here.
+# GXF libs are also installed to both ${libdir} and share/.../gxf/lib/, causing
+# duplicate shlib provider entries — exclude this package from shlibs tracking.
+EXCLUDE_FROM_SHLIBS = "1"
 INSANE_SKIP:${PN} += "file-rdeps"
 INSANE_SKIP:${PN}-dev += "dev-elf"
