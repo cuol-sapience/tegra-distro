@@ -47,3 +47,4 @@ index e3005f0..ded2a36 100644
 +  generate_version_info(${PROJECT_NAME})
 +endif()
  
+ ament_auto_package(INSTALL_TO_SHARE config)
