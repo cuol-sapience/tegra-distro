@@ -108,11 +108,7 @@ inherit ros_${ROS_BUILD_TYPE}
 
 EXTRA_OECMAKE += " \
     -DCMAKE_NO_SYSTEM_FROM_IMPORTED=ON \
-    -DCMAKE_CUDA_IMPLICIT_INCLUDE_DIRECTORIES=${RECIPE_SYSROOT}${includedir} \
 "
-
-# 87 (8.7) is Orin Nano's compute capability
-EXTRA_OECMAKE:append:jetson-orin-nano-devkit = " -DCMAKE_CUDA_ARCHITECTURES=87-real "
 
 TARGET_CXXFLAGS:append = " -Wno-template-body "
 

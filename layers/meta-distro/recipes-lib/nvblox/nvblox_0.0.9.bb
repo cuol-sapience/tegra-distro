@@ -58,13 +58,7 @@ EXTRA_OECMAKE:append  = " \
     -DUSE_SYSTEM_GTEST=ON \
     -DUSE_SYSTEM_SQLITE3=ON \
     -DUSE_SYSTEM_STDGPU=ON \
-    -DCMAKE_CUDA_IMPLICIT_INCLUDE_DIRECTORIES=${RECIPE_SYSROOT}${includedir} \
 "
-
-# Set cuda arch since we may not be compiling on target hardware
-# 87 (8.7) is orin nano's compute capability, (this opt may include forward compat. stuff)
-# 87-real means generate for  this hardware *exactly* (may not work on future cap. versions)
-EXTRA_OECMAKE:jetson-orin-nano-devkit:append = " -DCMAKE_CUDA_ARCHITECTURES=87-real "
 
 TARGET_CXXFLAGS:append = " -Wno-template-body "
 
