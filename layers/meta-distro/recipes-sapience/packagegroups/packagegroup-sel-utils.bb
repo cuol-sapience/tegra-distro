@@ -22,4 +22,5 @@ RDEPENDS:${PN} = "\
     nano \
     tmux \
     screen \
+    rsync \
 "

@@ -30,4 +30,5 @@ RDEPENDS:${PN} = " \
     tegra-configs-udev \
     tegra-firmware \
     resize-nvme \
+    python3-jetson-stats \
 "
