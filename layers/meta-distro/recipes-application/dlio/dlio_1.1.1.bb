@@ -10,9 +10,9 @@ ROS_CN = "direct-lidar-inertial-odometry"
 ROS_BPN = "direct_lidar_inertial_odometry"
 
 PV = "1.1.1"
-PR = "r0"
+PR = "r1"
 
-SRCREV = "bbbd0677a78ac5468d65b332a8c4415ad1693c18"
+SRCREV = "0c67c469cbe86c376fb3f586201b26b1237c61da"
 SRC_URI = "git://github.com/cuol-sapience/dlio.git;branch=city;protocol=https"
 
 
