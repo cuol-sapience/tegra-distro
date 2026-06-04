@@ -1,0 +1,29 @@
+From ca894dee81a9f67cf791ed510ec09ceccc404956 Mon Sep 17 00:00:00 2001
+From: Maxim De Clercq <maximdeclercq00@gmail.com>
+Date: Tue, 17 Mar 2026 10:18:07 +0100
+Subject: [PATCH] fix: multiprocessing pickle error on python 3.14+
+
+Python 3.14 changed the default multiprocessing start method from "fork"
+to "forkserver". The forkserver method requires all objects passed to
+child processes to be picklable, but JtopServer.__init__ registers
+lambda closures with JtopManager.register() which cannot be pickled.
+---
+ jtop/service.py | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/jtop/service.py b/jtop/service.py
+index 992df62d..ec69fa39 100644
+--- a/jtop/service.py
++++ b/jtop/service.py
+@@ -52,6 +52,11 @@
+ from .core.jetson_clocks import JetsonClocksService
+ from .core.nvpmodel import NVPModelService
+ 
++# Python 3.14 changed the default start method to "forkserver" which requires
++# all objects to be picklable. Force "fork" to avoid pickle errors with lambdas.
++import multiprocessing
++multiprocessing.set_start_method("fork", force=True)
++
+ # Optional JetsonPower integration
+ try:
+     from .core.jetsonpower_provider import JetsonPowerProvider
