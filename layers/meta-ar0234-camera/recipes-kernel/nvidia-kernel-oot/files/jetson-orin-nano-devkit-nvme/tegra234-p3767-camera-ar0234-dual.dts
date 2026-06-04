@@ -48,6 +48,14 @@
 
             tegra-camera-platform {
                 compatible = "nvidia, tegra-camera-platform";
+                num_csi_lanes = <4>;
+                max_lane_speed = <1500000>;
+                min_bits_per_pixel = <10>;
+                vi_peak_byte_per_pixel = <2>;
+                vi_bw_margin_pct = <25>;
+                max_pixel_rate = <7500000>;
+                isp_peak_byte_per_pixel = <5>;
+                isp_bw_margin_pct = <25>;
                 modules {
                     module0 {
                         badge = "ar0234_front";
@@ -121,10 +129,6 @@
                     };
                 };
 
-                i2c@3180000 {
-                    clock-frequency = <1000000>;
-                };
-
                 cam_i2cmux {
                     status = "okay";
                     compatible = "i2c-mux-gpio";
@@ -159,7 +163,7 @@
                                 num_lanes = "2";
                                 tegra_sinterface = "serial_b";
                                 phy_mode = "DPHY";
-                                discontinuous_clk = "no";
+                                discontinuous_clk = "yes";
                                 dpcm_enable = "false";
                                 cil_settletime = "0";
                                 lane_polarity = "6";
@@ -187,7 +191,7 @@
                                 default_framerate = "30000000";
                                 exposure_factor = "1000000";
                                 min_exp_time = "13";
-                                max_exp_time = "683709";
+                                max_exp_time = "33333";
                                 step_exp_time = "1";
                                 default_exp_time = "2495";
                                 embedded_metadata_height = "0";
@@ -197,7 +201,7 @@
                                 num_lanes = "2";
                                 tegra_sinterface = "serial_b";
                                 phy_mode = "DPHY";
-                                discontinuous_clk = "no";
+                                discontinuous_clk = "yes";
                                 dpcm_enable = "false";
                                 cil_settletime = "0";
                                 lane_polarity = "6";
@@ -225,7 +229,7 @@
                                 default_framerate = "60000000";
                                 exposure_factor = "1000000";
                                 min_exp_time = "13";
-                                max_exp_time = "683709";
+                                max_exp_time = "16667";
                                 step_exp_time = "1";
                                 default_exp_time = "2495";
                                 embedded_metadata_height = "0";
@@ -235,7 +239,7 @@
                                 num_lanes = "2";
                                 tegra_sinterface = "serial_b";
                                 phy_mode = "DPHY";
-                                discontinuous_clk = "no";
+                                discontinuous_clk = "yes";
                                 dpcm_enable = "false";
                                 cil_settletime = "0";
                                 lane_polarity = "6";
@@ -263,7 +267,7 @@
                                 default_framerate = "120000000";
                                 exposure_factor = "1000000";
                                 min_exp_time = "13";
-                                max_exp_time = "683709";
+                                max_exp_time = "8333";
                                 step_exp_time = "1";
                                 default_exp_time = "2495";
                                 embedded_metadata_height = "0";
@@ -310,7 +314,7 @@
                                 num_lanes = "2";
                                 tegra_sinterface = "serial_c";
                                 phy_mode = "DPHY";
-                                discontinuous_clk = "no";
+                                discontinuous_clk = "yes";
                                 dpcm_enable = "false";
                                 cil_settletime = "0";
                                 lane_polarity = "0";
@@ -338,7 +342,7 @@
                                 default_framerate = "30000000";
                                 exposure_factor = "1000000";
                                 min_exp_time = "13";
-                                max_exp_time = "683709";
+                                max_exp_time = "33333";
                                 step_exp_time = "1";
                                 default_exp_time = "2495";
                                 embedded_metadata_height = "0";
@@ -348,7 +352,7 @@
                                 num_lanes = "2";
                                 tegra_sinterface = "serial_c";
                                 phy_mode = "DPHY";
-                                discontinuous_clk = "no";
+                                discontinuous_clk = "yes";
                                 dpcm_enable = "false";
                                 cil_settletime = "0";
                                 lane_polarity = "0";
@@ -376,7 +380,7 @@
                                 default_framerate = "60000000";
                                 exposure_factor = "1000000";
                                 min_exp_time = "13";
-                                max_exp_time = "683709";
+                                max_exp_time = "16667";
                                 step_exp_time = "1";
                                 default_exp_time = "2495";
                                 embedded_metadata_height = "0";
@@ -386,7 +390,7 @@
                                 num_lanes = "2";
                                 tegra_sinterface = "serial_c";
                                 phy_mode = "DPHY";
-                                discontinuous_clk = "no";
+                                discontinuous_clk = "yes";
                                 dpcm_enable = "false";
                                 cil_settletime = "0";
                                 lane_polarity = "0";
@@ -414,7 +418,7 @@
                                 default_framerate = "120000000";
                                 exposure_factor = "1000000";
                                 min_exp_time = "13";
-                                max_exp_time = "683709";
+                                max_exp_time = "8333";
                                 step_exp_time = "1";
                                 default_exp_time = "2495";
                                 embedded_metadata_height = "0";

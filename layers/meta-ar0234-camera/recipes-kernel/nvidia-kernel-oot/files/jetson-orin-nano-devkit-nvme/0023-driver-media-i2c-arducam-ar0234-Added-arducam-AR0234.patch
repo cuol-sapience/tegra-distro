@@ -81,7 +81,7 @@ new file mode 100644
 index 00000000..c8fc40ca
 --- /dev/null
 +++ b/nvidia-oot/drivers/media/i2c/arducam_jetvariety.c
-@@ -0,0 +1,1060 @@
+@@ -0,0 +1,1051 @@
 +/*
 + * arducam.c - arducam sensor driver
 + *
@@ -349,11 +349,6 @@ index 00000000..c8fc40ca
 +
 +	if (!priv->streaming)
 +		return 0;
-+	if (time_before(jiffies, priv->last_gain_jiffies + msecs_to_jiffies(50)))
-+		return 0;
-+	priv->last_gain_jiffies = jiffies;
-+	if (arducam_wait_for_idle(priv->i2c_client, dev, 5, 200) < 0)
-+		return 0;
 +	if (val < mode->control_properties.min_gain_val)
 +		val = mode->control_properties.min_gain_val;
 +	else if (val > mode->control_properties.max_gain_val)
@@ -366,7 +361,8 @@ index 00000000..c8fc40ca
 +		__func__, val, mode->control_properties.gain_factor, gain);
 +	err = arducam_write(priv->i2c_client,CTRL_ID_REG, V4L2_CID_ANALOGUE_GAIN);
 +	err += arducam_write(priv->i2c_client,CTRL_VALUE_REG, gain & 0xFFFFFFFF);
-+	priv->last_gain_jiffies = jiffies;
++	if (err)
++		return -1;
 +	return 0;
 +}
 +
@@ -383,11 +379,6 @@ index 00000000..c8fc40ca
 +	u32 frame_length, vblank;
 +
 +	if (!priv->streaming)
-+		return 0;
-+	if (time_before(jiffies, priv->last_framerate_jiffies + msecs_to_jiffies(50)))
-+		return 0;
-+	priv->last_framerate_jiffies = jiffies;
-+	if (arducam_wait_for_idle(priv->i2c_client, dev, 5, 200) < 0)
 +		return 0;
 +
 +	/* Use cached vblank limits from set_mode instead of querying MCU */
@@ -411,7 +402,6 @@ index 00000000..c8fc40ca
 +	err = arducam_write(priv->i2c_client, CTRL_ID_REG, V4L2_CID_VBLANK);
 +	err += arducam_write(priv->i2c_client, CTRL_VALUE_REG,
 +		vblank & 0xFFFFFFFF);
-+	priv->last_framerate_jiffies = jiffies;
 +	if (err)
 +		return -1;
 +	return 0;
@@ -428,19 +418,13 @@ index 00000000..c8fc40ca
 +
 +	if (!priv->streaming)
 +		return 0;
-+	if (time_before(jiffies, priv->last_exposure_jiffies + msecs_to_jiffies(50)))
-+		return 0;
-+	priv->last_exposure_jiffies = jiffies;
-+	if (arducam_wait_for_idle(priv->i2c_client, tc_dev->dev, 5, 200) < 0)
-+		return 0;
 +	coarse_time = val*mode->signal_properties.pixel_clock.val
 +		/ mode->control_properties.exposure_factor
 +		/ mode->image_properties.line_length;
-+	if(coarse_time>=priv->frame_length)
++	if(priv->frame_length && coarse_time>=priv->frame_length)
 +		coarse_time = priv->frame_length;
 +	err  = arducam_write(priv->i2c_client,CTRL_ID_REG,V4L2_CID_EXPOSURE);
 +	err  += arducam_write(priv->i2c_client,CTRL_VALUE_REG,coarse_time&0xFFFFFFFF);
-+	priv->last_exposure_jiffies = jiffies;
 +	if(err)
 +		return -1;
 +	return 0;
@@ -813,6 +797,12 @@ index 00000000..c8fc40ca
 +		dev_info(tc_dev->dev, "%s: vblank_min=%u vblank_max=%u\n",
 +			__func__, priv->vblank_min, priv->vblank_max);
 +
++	/* Seed frame_length so set_exposure has a valid clamp before the first
++	 * set_frame_rate runs; otherwise coarse_time clamps to 0 (black frame). */
++	priv->frame_length =
++		s_data->sensor_props.sensor_modes[s_data->mode_prop_idx].image_properties.height
++		+ priv->vblank_min;
++
 +	return 0;
 +}
 +
@@ -939,10 +929,7 @@ index 00000000..c8fc40ca
 +	.open = arducam_open,
 +};
 +
-+#if defined RD_MCU_INFO
-+	struct camera_common_frmfmt* arducam_frmfmt= NULL;
-+	int** arducam_frame_rates = NULL;
-+#else
++#if !defined RD_MCU_INFO
 +	static const int arducam_35fps[] = {
 +		35,
 +	};
@@ -966,6 +953,10 @@ index 00000000..c8fc40ca
 +	int index = 0;
 +	int ret;
 +	int err;
++#if defined RD_MCU_INFO
++	struct camera_common_frmfmt *arducam_frmfmt;
++	int **arducam_frame_rates;
++#endif
 +
 +	dev_dbg(dev, "probing v4l2 sensor at addr 0x%0x\n", client->addr);
 +
@@ -1028,7 +1019,7 @@ index 00000000..c8fc40ca
 +			pixformat_index ++;	
 +		}
 +		arducam_frame_rates = devm_kzalloc(dev,
-+					sizeof(int)*num_resolution,GFP_KERNEL);
++					sizeof(int *)*num_resolution,GFP_KERNEL);
 +		if(!arducam_frame_rates)
 +			return -ENOMEM;
 +		arducam_frmfmt = devm_kzalloc(dev,
