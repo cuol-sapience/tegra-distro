@@ -29,6 +29,7 @@ RDEPENDS:${PN} = " \
     nvidia-kernel-oot-devicetrees \
     tegra-configs-udev \
     tegra-firmware \
+    tegra-tools \
     resize-nvme \
     python3-jetson-stats \
 "
