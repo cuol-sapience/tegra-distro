@@ -12,4 +12,7 @@ RDEPENDS:${PN} = "\
     pytorch \
     python3-torch \
     nvblox \
+    tensorrt-core \
+    tensorrt-samples \
+    tensorrt-plugins \
 "
