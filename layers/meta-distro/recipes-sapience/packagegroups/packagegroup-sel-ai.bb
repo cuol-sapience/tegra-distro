@@ -15,5 +15,4 @@ RDEPENDS:${PN} = "\
     tensorrt-core \
     tensorrt-samples \
     tensorrt-plugins \
-    python3-ultralytics \
 "
