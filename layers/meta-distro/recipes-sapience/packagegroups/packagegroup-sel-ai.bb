@@ -15,4 +15,6 @@ RDEPENDS:${PN} = "\
     tensorrt-core \
     tensorrt-samples \
     tensorrt-plugins \
+    tensorrt-trtexec \
+    tensorrt-trtexec-prebuilt \
 "
