@@ -11,7 +11,6 @@ PACKAGES = "${PN}"
 RDEPENDS:${PN} = "\
     pytorch \
     python3-torch \
-    torchvision \
     nvblox \
     tensorrt-core \
     tensorrt-samples \
