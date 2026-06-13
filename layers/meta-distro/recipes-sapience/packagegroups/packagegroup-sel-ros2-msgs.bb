@@ -12,4 +12,5 @@ RDEPENDS:${PN} = "\
     common-interfaces \
 	action-msgs \
 	lifecycle-msgs \
+	vision-msgs \
 "
