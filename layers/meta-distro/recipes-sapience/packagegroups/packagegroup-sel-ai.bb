@@ -10,12 +10,10 @@ PACKAGES = "${PN} ${PN}-staticdev"
 
 SEL_AI_PACKAGES = "\
     pytorch \
-    python3-torch \
     nvblox \
     tensorrt-core \
     tensorrt-samples \
-    tensorrt-plugins \
-    tensorrt-trtexec \
+    tensorrt-plugins-prebuilt \
     tensorrt-trtexec-prebuilt \
 "
 
