@@ -17,7 +17,4 @@ RDEPENDS:${PN} = "\
     tensorrt-plugins \
     tensorrt-trtexec \
     tensorrt-trtexec-prebuilt \
-    onnx \
-    onnxruntime \
-    python3-onnx \
 "
