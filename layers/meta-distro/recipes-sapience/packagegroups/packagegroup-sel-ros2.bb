@@ -66,13 +66,4 @@ RDEPENDS:${PN} = "\
 
 RDEPENDS:${PN}-staticdev = "\
      micro-xrce-dds-agent-staticdev \
-     packagegroup-sel-ros2-ament-staticdev \
-     packagegroup-sel-ros2-colcon-staticdev \
-     packagegroup-sel-ros2-extra-staticdev \
-     packagegroup-sel-ros2-flir-staticdev \
-     packagegroup-sel-ros2-msgs-staticdev \
-     packagegroup-sel-ros2-ouster-staticdev \
-     packagegroup-sel-ros2-rcl-staticdev \
-     packagegroup-sel-ros2-rosdep-staticdev \
-     packagegroup-sel-ros2-rosidl-staticdev \
 "
