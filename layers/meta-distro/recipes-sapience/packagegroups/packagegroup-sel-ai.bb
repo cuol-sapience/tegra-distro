@@ -6,9 +6,9 @@ inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PACKAGES = "${PN}"
+PACKAGES = "${PN} ${PN}-staticdev"
 
-RDEPENDS:${PN} = "\
+SEL_AI_PACKAGES = "\
     pytorch \
     python3-torch \
     nvblox \
@@ -18,3 +18,6 @@ RDEPENDS:${PN} = "\
     tensorrt-trtexec \
     tensorrt-trtexec-prebuilt \
 "
+
+RDEPENDS:${PN} = "${SEL_AI_PACKAGES}"
+RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_AI_PACKAGES').split())}"

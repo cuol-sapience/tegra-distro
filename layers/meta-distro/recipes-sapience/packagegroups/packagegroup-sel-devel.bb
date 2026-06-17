@@ -7,12 +7,16 @@ inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PACKAGES = "${PN}"
+PACKAGES = "${PN} ${PN}-staticdev"
 
-RDEPENDS:${PN} = "\
+SEL_DEVEL_PACKAGES = "\
     packagegroup-core-buildessential \
     git \
     cmake \
     make \
     ninja \
 "
+
+RDEPENDS:${PN} = "${SEL_DEVEL_PACKAGES}"
+
+RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_DEVEL_PACKAGES').split())}"

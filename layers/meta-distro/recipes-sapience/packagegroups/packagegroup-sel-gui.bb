@@ -6,8 +6,7 @@ inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-
-PACKAGES = "${PN}"
+PACKAGES = "${PN} ${PN}-staticdev"
 
 SEL_GUI_DE_RDEPENDS = "\
     packagegroup-gnome-desktop \
@@ -42,8 +41,12 @@ SEL_GUI_APPS_RDEPENDS = "\
     vlc \
 "
 
+SEL_GUI_PACKAGES = "${SEL_GUI_DE_RDEPENDS} ${SEL_GUI_SOUND_RDEPENDS} ${SEL_GUI_APPS_RDEPENDS}"
+
 RDEPENDS:${PN} = "\
     ${SEL_GUI_DE_RDEPENDS} \
     ${SEL_GUI_SOUND_RDEPENDS} \
     ${SEL_GUI_APPS_RDEPENDS} \
 "
+
+RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_GUI_PACKAGES').split())}"

@@ -7,9 +7,9 @@ inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PACKAGES = "${PN}"
+PACKAGES = "${PN} ${PN}-staticdev"
 
-RDEPENDS:${PN} = "\
+SEL_UTILS_PACKAGES = "\
     bash \
     sudo \
     net-tools \
@@ -24,3 +24,7 @@ RDEPENDS:${PN} = "\
     screen \
     rsync \
 "
+
+RDEPENDS:${PN} = "${SEL_UTILS_PACKAGES}"
+
+RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_UTILS_PACKAGES').split())}"

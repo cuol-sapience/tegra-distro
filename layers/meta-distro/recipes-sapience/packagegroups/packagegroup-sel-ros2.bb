@@ -7,8 +7,7 @@ inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-
-PACKAGES = "${PN}"
+PACKAGES = "${PN} ${PN}-staticdev"
 
 ROS2_PKG_CAMERA_CALIBRATION = "\
      camera-calibration \
@@ -40,7 +39,7 @@ ROS2_PKG_CLI = "\
      rosbag2-transport \
 "
 
-RDEPENDS:${PN} = "\
+SEL_ROS2_PACKAGES = "\
      ros-core \
      ros-base \
      micro-xrce-dds-agent \
@@ -63,3 +62,7 @@ RDEPENDS:${PN} = "\
      ${ROS2_PKG_CAMERA} \
      ${ROS2_PKG_CLI} \
 "
+
+RDEPENDS:${PN} = "${SEL_ROS2_PACKAGES}"
+
+RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_ROS2_PACKAGES').split())}"

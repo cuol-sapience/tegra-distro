@@ -7,9 +7,9 @@ inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PACKAGES = "${PN}"
+PACKAGES = "${PN} ${PN}-staticdev"
 
-RDEPENDS:${PN} = "\
+SEL_CORE_PACKAGES = "\
     sel-environment \
     packagegroup-sel-ros2 \
     packagegroup-sel-utils \
@@ -19,8 +19,16 @@ RDEPENDS:${PN} = "\
     python3-pip \
 "
 
+RDEPENDS:${PN} = "${SEL_CORE_PACKAGES}"
+
+RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_CORE_PACKAGES').split())}"
+
 RDEPENDS:${PN}:append:jetson-orin-nano-devkit = " \
     kernel-module-smsc95xx \
     networkmanager-nmcli \
     packagegroup-sel-ai \
+"
+
+RRECOMMENDS:${PN}-staticdev:append:jetson-orin-nano-devkit = " \
+    packagegroup-sel-ai-staticdev \
 "

@@ -7,8 +7,9 @@ inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
+PACKAGES = "${PN} ${PN}-staticdev"
 
-RDEPENDS:${PN} = "\
+SEL_ROS2_EXTRA_PACKAGES = "\
 	python3-distlib \
 	python3-empy \
 	python3-flake8 \
@@ -31,3 +32,7 @@ RDEPENDS:${PN} = "\
 	examples-rclcpp-minimal-subscriber \
 	topic-tools \
 "
+
+RDEPENDS:${PN} = "${SEL_ROS2_EXTRA_PACKAGES}"
+
+RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_ROS2_EXTRA_PACKAGES').split())}"

@@ -7,11 +7,15 @@ inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PACKAGES = "${PN}"
+PACKAGES = "${PN} ${PN}-staticdev"
 
-RDEPENDS:${PN} = "\
+SEL_ROS2_FLIR_PACKAGES = "\
      flir-camera-description \
      flir-camera-msgs \
      spinnaker-camera-driver \
      spinnaker-synchronized-camera-driver \
 "
+
+RDEPENDS:${PN} = "${SEL_ROS2_FLIR_PACKAGES}"
+
+RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_ROS2_FLIR_PACKAGES').split())}"

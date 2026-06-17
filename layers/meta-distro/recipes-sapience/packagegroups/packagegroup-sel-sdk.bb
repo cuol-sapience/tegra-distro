@@ -7,17 +7,15 @@ inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
+PACKAGES = "${PN} ${PN}-staticdev"
 
-PACKAGES = "${PN}"
-
-RDEPENDS:${PN} = "\
+SEL_SDK_PACKAGES = "\
     packagegroup-core-sdk \
     packagegroup-core-standalone-sdk-target \
     packagegroup-core-tools-debug \
     packagegroup-sel-ros2-dev \
 "
 
-RDEPENDS:${PN}:append:jetson-orin-nano-devkit = " \
-    packagegroup-sel-ai-dev \
-    cuda-toolkit-dev \
-"
+RDEPENDS:${PN} = "${SEL_SDK_PACKAGES}"
+
+RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_SDK_PACKAGES').split())}"

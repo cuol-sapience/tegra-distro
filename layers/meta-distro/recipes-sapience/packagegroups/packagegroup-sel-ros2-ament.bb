@@ -7,10 +7,11 @@ inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
+PACKAGES = "${PN} ${PN}-staticdev"
 
 # ament-download: needs meta-ros c65eb7cda2952e8d7594ef8b055ecf9419db2886 applied to humble
 
-RDEPENDS:${PN} = "\
+SEL_ROS2_AMENT_PACKAGES = "\
     ament-cmake-auto \
 	ament-cmake-core \
 	ament-cmake-export-definitions \
@@ -61,3 +62,7 @@ RDEPENDS:${PN} = "\
 	ament-nodl \
 	ament-package \
 "
+
+RDEPENDS:${PN} = "${SEL_ROS2_AMENT_PACKAGES}"
+
+RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_ROS2_AMENT_PACKAGES').split())}"

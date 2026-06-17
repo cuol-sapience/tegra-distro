@@ -7,9 +7,9 @@ inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PACKAGES = "${PN}"
+PACKAGES = "${PN} ${PN}-staticdev"
 
-RDEPENDS:${PN} = " \
+SEL_MULTIMEDIA_PACKAGES = " \
     v4l-utils \
     gstreamer1.0-plugins-good \
     gstreamer1.0-plugins-bad \
@@ -19,12 +19,23 @@ RDEPENDS:${PN} = " \
     vim-xxd \
 "
 
+RDEPENDS:${PN} = "${SEL_MULTIMEDIA_PACKAGES}"
+
+RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_MULTIMEDIA_PACKAGES').split())}"
 
 # gstreamer1.0-plugins-tegra is a metapackage for all tegra gstreamer plugins
-RDEPENDS:${PN}:append:jetson-orin-nano-devkit  = " \
+RDEPENDS:${PN}:append:jetson-orin-nano-devkit = " \
     tegra-argus-daemon \
     tegra-mmapi \
     tegra-libraries-camera \
     gstreamer1.0-plugins-tegra \
     ar0234-mipi-nvidia \
+"
+
+RRECOMMENDS:${PN}-staticdev:append:jetson-orin-nano-devkit = " \
+    tegra-argus-daemon-staticdev \
+    tegra-mmapi-staticdev \
+    tegra-libraries-camera-staticdev \
+    gstreamer1.0-plugins-tegra-staticdev \
+    ar0234-mipi-nvidia-staticdev \
 "
