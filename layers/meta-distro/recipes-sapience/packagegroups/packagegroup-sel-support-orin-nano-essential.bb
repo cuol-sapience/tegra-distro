@@ -7,9 +7,9 @@ inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PACKAGES = "${PN} ${PN}-staticdev"
+PACKAGES = "${PN}"
 
-SEL_SUPPORT_ORIN_NANO_ESSENTIAL_PACKAGES = " \
+RDEPENDS:${PN} = " \
     setup-nv-boot-control \
     tegra-nv-boot-control-config \
     tegra-redundant-boot \
@@ -34,7 +34,3 @@ SEL_SUPPORT_ORIN_NANO_ESSENTIAL_PACKAGES = " \
     resize-nvme \
     python3-jetson-stats \
 "
-
-RDEPENDS:${PN} = "${SEL_SUPPORT_ORIN_NANO_ESSENTIAL_PACKAGES}"
-
-RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_SUPPORT_ORIN_NANO_ESSENTIAL_PACKAGES').split())}"

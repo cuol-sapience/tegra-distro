@@ -7,9 +7,9 @@ inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PACKAGES = "${PN} ${PN}-staticdev"
+PACKAGES = "${PN}"
 
-SEL_ROS2_ROSIDL_PACKAGES = "\
+RDEPENDS:${PN} = "\
 	rosidl-adapter \
 	rosidl-cli \
 	rosidl-cmake \
@@ -32,7 +32,3 @@ SEL_ROS2_ROSIDL_PACKAGES = "\
 	rosidl-typesupport-fastrtps-c \
 	rosidl-typesupport-fastrtps-cpp \
 "
-
-RDEPENDS:${PN} = "${SEL_ROS2_ROSIDL_PACKAGES}"
-
-RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_ROS2_ROSIDL_PACKAGES').split())}"

@@ -9,7 +9,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 PACKAGES = "${PN} ${PN}-staticdev"
 
-SEL_CORE_PACKAGES = "\
+RDEPENDS:${PN} = "\
     sel-environment \
     packagegroup-sel-ros2 \
     packagegroup-sel-utils \
@@ -19,9 +19,10 @@ SEL_CORE_PACKAGES = "\
     python3-pip \
 "
 
-RDEPENDS:${PN} = "${SEL_CORE_PACKAGES}"
-
-RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_CORE_PACKAGES').split())}"
+RDEPENDS:${PN}-staticdev = "\
+    packagegroup-sel-ros2-staticdev \
+    packagegroup-sel-sdk-staticdev \
+"
 
 RDEPENDS:${PN}:append:jetson-orin-nano-devkit = " \
     kernel-module-smsc95xx \

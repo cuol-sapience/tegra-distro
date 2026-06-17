@@ -7,9 +7,9 @@ inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PACKAGES = "${PN} ${PN}-staticdev"
+PACKAGES = "${PN}"
 
-SEL_ROS2_RCL_PACKAGES = "\
+RDEPENDS:${PN} = "\
 	rcl-interfaces \
 	rcl-logging-interface \
 	rcl-logging-noop \
@@ -24,7 +24,3 @@ SEL_ROS2_RCL_PACKAGES = "\
 	rcl-yaml-param-parser \
 	rcl \
 "
-
-RDEPENDS:${PN} = "${SEL_ROS2_RCL_PACKAGES}"
-
-RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_ROS2_RCL_PACKAGES').split())}"

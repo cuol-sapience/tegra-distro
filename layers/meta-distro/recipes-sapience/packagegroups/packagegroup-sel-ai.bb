@@ -8,7 +8,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 PACKAGES = "${PN} ${PN}-staticdev"
 
-SEL_AI_PACKAGES = "\
+RDEPENDS:${PN} = "\
     pytorch \
     nvblox \
     tensorrt-core \
@@ -17,5 +17,8 @@ SEL_AI_PACKAGES = "\
     tensorrt-trtexec-prebuilt \
 "
 
-RDEPENDS:${PN} = "${SEL_AI_PACKAGES}"
-RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_AI_PACKAGES').split())}"
+RDEPENDS:${PN}-staticdev = "\
+    pytorch-staticdev \
+    tensorrt-core-staticdev \
+    tensorrt-plugins-prebuilt-staticdev \
+"

@@ -7,15 +7,11 @@ inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PACKAGES = "${PN} ${PN}-staticdev"
+PACKAGES = "${PN}"
 
-SEL_ROS2_MSGS_PACKAGES = "\
+RDEPENDS:${PN} = "\
     common-interfaces \
 	action-msgs \
 	lifecycle-msgs \
 	vision-msgs \
 "
-
-RDEPENDS:${PN} = "${SEL_ROS2_MSGS_PACKAGES}"
-
-RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_ROS2_MSGS_PACKAGES').split())}"

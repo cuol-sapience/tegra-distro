@@ -6,7 +6,7 @@ inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PACKAGES = "${PN} ${PN}-staticdev"
+PACKAGES = "${PN}"
 
 SEL_GUI_DE_RDEPENDS = "\
     packagegroup-gnome-desktop \
@@ -48,5 +48,3 @@ RDEPENDS:${PN} = "\
     ${SEL_GUI_SOUND_RDEPENDS} \
     ${SEL_GUI_APPS_RDEPENDS} \
 "
-
-RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_GUI_PACKAGES').split())}"

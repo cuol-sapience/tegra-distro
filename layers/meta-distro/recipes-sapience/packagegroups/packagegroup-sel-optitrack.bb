@@ -7,7 +7,7 @@ inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PACKAGES = "${PN} ${PN}-staticdev"
+PACKAGES = "${PN}"
 
 SEL_OPTITRACK_PACKAGES = "\
     vrpn \
@@ -15,5 +15,3 @@ SEL_OPTITRACK_PACKAGES = "\
 "
 
 RDEPENDS:${PN} = "${SEL_OPTITRACK_PACKAGES}"
-
-RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_OPTITRACK_PACKAGES').split())}"

@@ -39,13 +39,14 @@ ROS2_PKG_CLI = "\
      rosbag2-transport \
 "
 
-SEL_ROS2_PACKAGES = "\
+RDEPENDS:${PN} = "\
      ros-core \
      ros-base \
      micro-xrce-dds-agent \
      fastdds \
      fastrtps \
      cyclonedds \
+     rmw-cyclonedds-cpp \
      packagegroup-sel-ros2-ament \
      packagegroup-sel-ros2-colcon \
      packagegroup-sel-ros2-extra \
@@ -63,6 +64,15 @@ SEL_ROS2_PACKAGES = "\
      ${ROS2_PKG_CLI} \
 "
 
-RDEPENDS:${PN} = "${SEL_ROS2_PACKAGES}"
-
-RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_ROS2_PACKAGES').split())}"
+RDEPENDS:${PN}-staticdev = "\
+     micro-xrce-dds-agent-staticdev \
+     packagegroup-sel-ros2-ament-staticdev \
+     packagegroup-sel-ros2-colcon-staticdev \
+     packagegroup-sel-ros2-extra-staticdev \
+     packagegroup-sel-ros2-flir-staticdev \
+     packagegroup-sel-ros2-msgs-staticdev \
+     packagegroup-sel-ros2-ouster-staticdev \
+     packagegroup-sel-ros2-rcl-staticdev \
+     packagegroup-sel-ros2-rosdep-staticdev \
+     packagegroup-sel-ros2-rosidl-staticdev \
+"

@@ -7,9 +7,9 @@ inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PACKAGES = "${PN} ${PN}-staticdev"
+PACKAGES = "${PN}"
 
-SEL_ROS2_COLCON_PACKAGES = "\
+RDEPENDS:${PN} = "\
 	python3-colcon-bash \
 	python3-colcon-cd \
 	python3-colcon-cmake \
@@ -29,7 +29,3 @@ SEL_ROS2_COLCON_PACKAGES = "\
 	python3-colcon-ros \
 	python3-colcon-test-result \
 "
-
-RDEPENDS:${PN} = "${SEL_ROS2_COLCON_PACKAGES}"
-
-RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_ROS2_COLCON_PACKAGES').split())}"

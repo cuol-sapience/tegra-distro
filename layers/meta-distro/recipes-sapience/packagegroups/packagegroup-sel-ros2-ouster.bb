@@ -7,14 +7,10 @@ inherit packagegroup
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-PACKAGES = "${PN} ${PN}-staticdev"
+PACKAGES = "${PN}"
 
-SEL_ROS2_OUSTER_PACKAGES = "\
+RDEPENDS:${PN} = "\
      ouster-ros \
      ouster-sensor-msgs \
      ouster-msgs \
 "
-
-RDEPENDS:${PN} = "${SEL_ROS2_OUSTER_PACKAGES}"
-
-RRECOMMENDS:${PN}-staticdev = "${@' '.join(p + '-staticdev' for p in d.getVar('SEL_ROS2_OUSTER_PACKAGES').split())}"
