@@ -1,0 +1,3 @@
+EXTRA_OECMAKE += "\
+    -DSPDLOG_FMT_EXTERNAL=ON \
+"
