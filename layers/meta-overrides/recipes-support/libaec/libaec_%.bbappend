@@ -1,1 +1,1 @@
-SRC_URI = "git://github.com/Deutsches-Klimarechenzentrum/libaec.git;branch=master;protocol=https"
+SRC_URI = "git://github.com/Deutsches-Klimarechenzentrum/libaec.git;branch=main;protocol=https"

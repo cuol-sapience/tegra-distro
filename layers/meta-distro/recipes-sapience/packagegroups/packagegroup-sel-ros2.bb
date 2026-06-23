@@ -60,6 +60,9 @@ RDEPENDS:${PN} = "\
      foxglove-msgs \
      ros-environment \
      ros-workspace \
+     pcl-ros \
+     cv-bridge \
+     opencv \
      ${ROS2_PKG_CAMERA} \
      ${ROS2_PKG_CLI} \
 "

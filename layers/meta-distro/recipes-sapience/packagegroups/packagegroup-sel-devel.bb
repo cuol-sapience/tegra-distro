@@ -15,4 +15,5 @@ RDEPENDS:${PN} = "\
     cmake \
     make \
     ninja \
+    libflann \
 "

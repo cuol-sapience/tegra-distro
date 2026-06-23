@@ -29,4 +29,5 @@ RDEPENDS:${PN} = "\
     iperf3 \
     tcpdump \
     chrony \
+    libcap-bin \
 "
