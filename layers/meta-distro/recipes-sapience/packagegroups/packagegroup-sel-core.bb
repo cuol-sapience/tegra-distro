@@ -17,6 +17,7 @@ RDEPENDS:${PN} = "\
     packagegroup-sel-optitrack \
     packagegroup-sel-sdk \
     python3-pip \
+    ripple \
 "
 
 RDEPENDS:${PN}-staticdev = "\
