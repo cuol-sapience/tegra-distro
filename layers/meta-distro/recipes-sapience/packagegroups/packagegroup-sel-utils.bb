@@ -23,4 +23,9 @@ RDEPENDS:${PN} = "\
     tmux \
     screen \
     rsync \
+    ncdu \
+    tailscale \
+    mtr \
+    iperf3 \
+    tcpdump \
 "
