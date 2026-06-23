@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/jcxldn/ripple"
 
 LICENSE = "CLOSED"
 
-SRCREV = "af91e6ff0f09b39e1d398c8dbd8a5083cf692285"
+SRCREV = "3e00afbfc9a0098e74b0e857a2ea4a308c77cbfa"
 SRC_URI = " \
     git://github.com/jcxldn/ripple.git;branch=main;protocol=https \
 "
