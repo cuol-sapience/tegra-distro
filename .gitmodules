@@ -34,3 +34,6 @@
 [submodule "repos/meta-tegra-community"]
 	path = repos/meta-tegra-community
 	url = https://github.com/OE4T/meta-tegra-community
+[submodule "repos/meta-python-ai"]
+	path = repos/meta-python-ai
+	url = https://github.com/zboszor/meta-python-ai
