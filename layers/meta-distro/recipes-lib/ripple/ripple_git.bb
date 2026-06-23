@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/jcxldn/ripple"
 
 LICENSE = "CLOSED"
 
-SRCREV = "3e00afbfc9a0098e74b0e857a2ea4a308c77cbfa"
+SRCREV = "bfa35726dc7de8e04d89ca029b8d64e299742ee9"
 SRC_URI = " \
     git://github.com/jcxldn/ripple.git;branch=main;protocol=https \
 "
@@ -16,6 +16,7 @@ DEPENDS = " \
     msquic \
     boost \
     spdlog \
+    fmt \
     cereal \
 "
 
