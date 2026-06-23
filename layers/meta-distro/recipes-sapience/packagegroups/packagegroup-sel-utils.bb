@@ -30,4 +30,9 @@ RDEPENDS:${PN} = "\
     tcpdump \
     chrony \
     libcap-bin \
+    bsdtar \
+    coreutils \
+    tar \
+    curl \
+    wget \
 "
