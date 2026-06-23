@@ -27,7 +27,7 @@ EOF
     touch "${DISTINFO}/RECORD"
 }
 
-FILES:python3-torch += "${PYTHON_SITEPACKAGES_DIR}/torch-${PV}.dist-info"
+FILES:${PN} += "${PYTHON_SITEPACKAGES_DIR}/torch-${PV}.dist-info"
 
 # Allow recipes to depend on either conventional PyPI-style alias for pytorch.
-RPROVIDES:pytorch += "python3-torch python3-pytorch"
+RPROVIDES:${PN} += "python3-torch python3-pytorch"
