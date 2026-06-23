@@ -10,7 +10,15 @@ PACKAGES = "${PN} ${PN}-staticdev"
 
 RDEPENDS:${PN} = "\
     pytorch \
+    torchvision \
     nvblox \
+    python3-optuna \
+    python3-pytorch-symbolic \
+    python3-resdag \
+    python3-scipy \
+"
+
+RDEPENDS:${PN}:append:jetson-orin-nano-devkit = "\
     tensorrt-core \
     tensorrt-samples \
     tensorrt-plugins-prebuilt \
@@ -19,6 +27,9 @@ RDEPENDS:${PN} = "\
 
 RDEPENDS:${PN}-staticdev = "\
     pytorch-staticdev \
+"
+
+RDEPENDS:${PN}-staticdev:append:jetson-orin-nano-devkit = "\
     tensorrt-core-staticdev \
     tensorrt-plugins-prebuilt-staticdev \
 "
