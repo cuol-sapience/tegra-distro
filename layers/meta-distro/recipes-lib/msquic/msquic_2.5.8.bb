@@ -39,9 +39,6 @@ EXTRA_OECMAKE += " \
 
 EXTRA_OECMAKE:append:aarch64 = " -DCMAKE_TARGET_ARCHITECTURE=arm64"
 
-FILES_SOLIBSDEV = ""
-FILES:${PN} += "${libdir}/*.so"
-
 INSANE_SKIP:${PN} += "buildpaths"
 INSANE_SKIP:${PN}-dev += "buildpaths"
 INSANE_SKIP:${PN}-dbg += "buildpaths"
