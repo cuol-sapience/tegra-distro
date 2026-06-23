@@ -28,4 +28,5 @@ RDEPENDS:${PN} = "\
     mtr \
     iperf3 \
     tcpdump \
+    chrony \
 "
