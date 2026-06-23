@@ -10,7 +10,6 @@ PACKAGES = "${PN} ${PN}-staticdev"
 
 RDEPENDS:${PN} = "\
     pytorch \
-    torchvision \
     nvblox \
     python3-optuna \
     python3-pytorch-symbolic \
