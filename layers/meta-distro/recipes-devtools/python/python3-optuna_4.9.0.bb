@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=67c2fc2ce50dfba96a2c5c1efdf60c2f"
 
 PYPI_PACKAGE = "optuna"
 
-inherit pypi setuptools3
+inherit pypi python_pep517 python_setuptools_build_meta
 
 SRC_URI[sha256sum] = "b322e5cbdf1655fb84c37646c4a7a1f391de1b47806bbe222e015825d0a82b87"
 
