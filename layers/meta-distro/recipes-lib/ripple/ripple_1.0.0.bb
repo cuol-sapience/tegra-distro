@@ -3,12 +3,10 @@ HOMEPAGE = "https://github.com/jcxldn/ripple"
 
 LICENSE = "CLOSED"
 
-SRCREV = "bfa35726dc7de8e04d89ca029b8d64e299742ee9"
+SRCREV = "7966e594f50ea7f5c4e7acc84269c057243dbe2c" # v1.0.0 24/06/26
 SRC_URI = " \
     git://github.com/jcxldn/ripple.git;branch=main;protocol=https \
 "
-
-PV = "0.0.1+git"
 
 inherit cmake
 
@@ -31,7 +29,7 @@ EXTRA_OECMAKE += " \
 "
 
 FILES_SOLIBSDEV = ""
-FILES:${PN} += "${libdir}/*.so"
-
-INSANE_SKIP:${PN} += "buildpaths"
-INSANE_SKIP:${PN}-dev += "buildpaths"
+FILES:${PN} += " \
+    ${libdir}/*.so \
+    ${libdir}/ripple_demo \
+"
