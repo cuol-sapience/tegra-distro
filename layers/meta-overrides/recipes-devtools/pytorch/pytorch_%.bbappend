@@ -1,6 +1,11 @@
 # Don't attempt to build with ROCm for nvidia SoC!
 EXTRA_OECMAKE:append:jetson-orin-nano-devkit = " -DUSE_ROCM=OFF "
 
+# Build a lapack backend
+DEPENDS += "openblas"
+EXTRA_OECMAKE += " -DBLAS=OpenBLAS -DUSE_LAPACK=ON"
+RDEPENDS:${PN} += "openblas"
+
 # Install a PEP 566 dist-info directory so pip recognises torch as already
 # installed and does not attempt to download the CPU wheel on top of the
 # Yocto-managed package.
